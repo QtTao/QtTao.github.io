@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>QtTao&#39;s Blog</title>
+  <title>hive与hbase的区别 | QtTao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="QtTao's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="定义
+hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）
+hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hive与hbase的区别">
+<meta property="og:url" content="http://yoursite.com/2017/02/01/hive-hbase/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
+<meta property="og:description" content="定义
+hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）
+hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实">
+<meta property="og:updated_time" content="2017-02-01T15:54:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QtTao's Blog">
+<meta name="twitter:title" content="hive与hbase的区别">
+<meta name="twitter:description" content="定义
+hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）
+hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实">
   
     <link rel="alternative" href="/atom.xml" title="QtTao&#39;s Blog" type="application/atom+xml">
   
@@ -147,173 +157,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-graph" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-hive-hbase" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/graph/">关于图的知识点</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/01/graph/" class="archive-article-date">
-  	<time datetime="2017-02-01T15:18:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构"></a>图的存储结构</h1><ul>
-<li>邻接矩阵（稠密矩阵：点少边多的情况）</li>
-<li>邻接表 （稀疏矩阵：点多边少的情况）</li>
-</ul>
-<h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><ul>
-<li><p>深度优先</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void DepthFSearch(AdjMGraph G, int v, int visited[], void Visit(char item))</div><div class="line">&#123;</div><div class="line">    int w;</div><div class="line">    Vist(G.Vertices.list[v]);</div><div class="line">    visited[v];</div><div class="line">    w = GetFirstVex(G, v);</div><div class="line">    /* 寻找当前顶点的邻接顶点 */</div><div class="line">    while (w != -1)</div><div class="line">    &#123;</div><div class="line">        if (!visited[w])</div><div class="line">            DepthFSearch(G, w, visited, Visit)</div><div class="line">        /* 若邻接顶点已被访问，则寻找下一个邻接顶点 */</div><div class="line">        w = GetNextVex(G, v, w);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/02/01/graph/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构/" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/graph/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-quicksort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/quicksort/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/01/quicksort/" class="archive-article-date">
-  	<time datetime="2017-02-01T15:07:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。</p>
-<h1 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h1><p>设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素前面的元素的关键字均小于标准元素的关键字，排在标准元素后面的元素的关键字均大于或等于标准元素的关键字。（即标准元素被放在了未来排好序的数组中该标准元素应在的位置）然后，对这两个字数组中的元素分别再进行方法类同的递归快速排序。递归算法的结束条件是high &lt;= low，即上界下表小于或等于下界下标。</p>
-        
-          <a class="article-more-a" href="/2017/02/01/quicksort/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构/" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/quicksort/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-hive-hbase" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a>
+    <h1 class="article-title" itemprop="name">
+      hive与hbase的区别
     </h1>
   
 
@@ -330,9 +181,21 @@
 <li>hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）</li>
 <li>hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实时运行，而不是运行map/reduce任务。hive被分区为表格，表格又被进一步分割为列簇。列簇必须使用schema定义，列簇将某一类型列集合起来。每一个key/value对在hbase中被定义为一个cell，每一个key由row-key，列簇，列和时间戳。在hbase中，行是key/value映射的集合，这个映射通过row-key来唯一标识。</li>
 </ul>
-        
-          <a class="article-more-a" href="/2017/02/01/hive-hbase/#more">more >></a>
-        
+<a id="more"></a>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ul>
+<li>hive帮助熟悉sql的人运行map/reduce任务。因为它是jdbc兼容的，同时它也能够和现存的sql工具整合一起。运行hive查询会花费很长时间，因为它会默认遍历表中所有数据。虽然有这样的缺点，一次遍历的数据量可以通过hive的分区机制来控制。分区允许在数据集上运行过滤查询，这些数据集存储在不同的文件夹内，查询的时候只遍历指定文件夹（分区）中的数据。</li>
+<li>hbase通过存储key/value来工作。它支持四种主要的操作，增加或者更新行，查看一个范围内的cell，获取指定的行，删除指定的行、列或者列的版本。版本信息用来获取历史数据（每一行的历史数据可以被删除，然后通过hbase compaction就可以释放空间）。虽然hbase包括表格，但是schema仅仅被表格和列簇所要求，列不需要schema。hbase的表格包括增加／计数功能。</li>
+</ul>
+<h1 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h1><ul>
+<li>hive目前不支持更新操作。另外，由于hive在hadoop上运行批量操作，它需要花费很长的时间，通常是几分钟到几个小时才可以获取到查询的结果。Hive必须提供预先定义好的schema将文件和目录映射到列，并且Hive与ACID不兼容。</li>
+<li>HBase查询是通过特定的语言来编写的，这种语言需要重新学习。类SQL的功能可以通过Apache Phonenix实现，但这是以必须提供schema为代价的。另外，Hbase也并不是兼容所有的ACID特性，虽然它支持某些特性。最后但不是最重要的–为了运行Hbase，zookeeper是必须的，zookeeper是一个用来进行分布式协调的服务，这些服务包括配置服务，维护元信息和命名空间服务。</li>
+</ul>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ul>
+<li>Hive适合用来对一段时间内的数据进行分析查询，例如，用来计算趋势或者网站的日志。Hive不应该用来进行实时的查询。因为它需要很长时间才可以返回结果。</li>
+<li>Hbase非常适合用来进行大数据的实时查询。Facebook用Hbase进行消息和实时的分析。它也可以用来统计Facebook的连接数。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Hive和Hbase是两种基于Hadoop的不同技术–Hive是一种类SQL的引擎，并且运行MapReduce任务，Hbase是一种在Hadoop之上的NoSQL 的Key/vale数据库。当然，这两种工具是可以同时使用的。就像用Google来搜索，用FaceBook进行社交一样，Hive可以用来进行统计查询，HBase可以用来进行实时查询，数据也可以从Hive写到Hbase，设置再从Hbase写回Hive。</p>
+
       
 
       
@@ -365,18 +228,83 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/hive-hbase/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/02/01/hive-hbase/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
+  
+<nav id="article-nav">
+  
+    <a href="/2017/02/01/quicksort/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          快速排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/01/binary-tree-non-recursive-traversal/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">二叉树的非递归遍历</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -384,83 +312,28 @@
 
 
   
-    <article id="post-binary-tree-non-recursive-traversal" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/01/binary-tree-non-recursive-traversal/" class="archive-article-date">
-  	<time datetime="2017-02-01T05:19:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> TreeNode &#123;</div><div class="line"><span class="keyword">public</span></div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    TreeNode *left, *right;</div><div class="line">    TreeNode(<span class="keyword">int</span> val) &#123;</div><div class="line">        <span class="keyword">this</span> -&gt; val = val;</div><div class="line">        <span class="keyword">this</span> -&gt; left = <span class="keyword">this</span> -&gt; right = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h1><p>根据前序遍历访问的顺序，优先访问根结点，然后再分别访问左孩子和右孩子。即对于任一结点，其可看做是根结点，因此可以直接访问，访问完之后，若其左孩子不为空，按相同规则访问它的左子树；当访问其左子树时，再访问它的右子树。因此其处理过程如下：</p>
-        
-          <a class="article-more-a" href="/2017/02/01/binary-tree-non-recursive-traversal/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构/" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/binary-tree-non-recursive-traversal/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hive-hbase" data-title="hive与hbase的区别" data-url="http://yoursite.com/2017/02/01/hive-hbase/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"qttao"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
-  
+
+
 
 
           </div>
@@ -482,8 +355,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

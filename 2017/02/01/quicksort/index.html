@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>QtTao&#39;s Blog</title>
+  <title>快速排序 | QtTao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="QtTao's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
+算法思想：设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速排序">
+<meta property="og:url" content="http://yoursite.com/2017/02/01/quicksort/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
+<meta property="og:description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
+算法思想：设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元">
+<meta property="og:image" content="http://yoursite.com/2017/02/01/quicksort/sort.jpg">
+<meta property="og:updated_time" content="2017-02-01T15:54:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QtTao's Blog">
+<meta name="twitter:title" content="快速排序">
+<meta name="twitter:description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
+算法思想：设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元">
+<meta name="twitter:image" content="http://yoursite.com/2017/02/01/quicksort/sort.jpg">
   
     <link rel="alternative" href="/atom.xml" title="QtTao&#39;s Blog" type="application/atom+xml">
   
@@ -147,97 +156,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-graph" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-quicksort" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/graph/">关于图的知识点</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/01/graph/" class="archive-article-date">
-  	<time datetime="2017-02-01T15:18:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构"></a>图的存储结构</h1><ul>
-<li>邻接矩阵（稠密矩阵：点少边多的情况）</li>
-<li>邻接表 （稀疏矩阵：点多边少的情况）</li>
-</ul>
-<h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><ul>
-<li><p>深度优先</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void DepthFSearch(AdjMGraph G, int v, int visited[], void Visit(char item))</div><div class="line">&#123;</div><div class="line">    int w;</div><div class="line">    Vist(G.Vertices.list[v]);</div><div class="line">    visited[v];</div><div class="line">    w = GetFirstVex(G, v);</div><div class="line">    /* 寻找当前顶点的邻接顶点 */</div><div class="line">    while (w != -1)</div><div class="line">    &#123;</div><div class="line">        if (!visited[w])</div><div class="line">            DepthFSearch(G, w, visited, Visit)</div><div class="line">        /* 若邻接顶点已被访问，则寻找下一个邻接顶点 */</div><div class="line">        w = GetNextVex(G, v, w);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/02/01/graph/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构/" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/graph/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-quicksort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/quicksort/">快速排序</a>
+    <h1 class="article-title" itemprop="name">
+      快速排序
     </h1>
   
 
@@ -252,9 +178,17 @@
       
         <p>快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。</p>
 <h1 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h1><p>设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素前面的元素的关键字均小于标准元素的关键字，排在标准元素后面的元素的关键字均大于或等于标准元素的关键字。（即标准元素被放在了未来排好序的数组中该标准元素应在的位置）然后，对这两个字数组中的元素分别再进行方法类同的递归快速排序。递归算法的结束条件是high &lt;= low，即上界下表小于或等于下界下标。</p>
-        
-          <a class="article-more-a" href="/2017/02/01/quicksort/#more">more >></a>
-        
+<a id="more"></a>
+<p>对快速排序 （挖坑填数）进行形象化总结：</p>
+<ol>
+<li>i = L; j = R; 将基准数（pivot）挖出形成第一个坑a[i]。</li>
+<li>j– 由后向前找比它小的数，找到后挖出此数填入前一个坑a[i]中。</li>
+<li>i++ 由前向后找比它大的数，找到后也挖出此数填入前一个坑a[j]中。</li>
+<li>再重复之行2，3二步，直到i == j，将基准数（pivot）填入a[i]中。</li>
+<li>递归调用上述步骤，直到数组中全部元素从小到大排序完成。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></div><div class="line"><span class="comment">/* 用递归方法对数据元素a[low]~a[high]进行快速排序 */</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i = low, j = high;</div><div class="line">    <span class="keyword">int</span> temp = a[low];</div><div class="line">    <span class="keyword">while</span> (i &lt; j)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">while</span>(i &lt; j &amp;&amp; temp &lt;= a[j]) j--; <span class="comment">//从数组右端扫描，找比基准小的数并赋给a[i]</span></div><div class="line">        <span class="keyword">if</span> (i &lt; j)</div><div class="line">        &#123;</div><div class="line">            a[i] = a[j];</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line">       </div><div class="line">        <span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; temp) i++; <span class="comment">//从数组左端扫描，找比基准大的数并赋给a[j]</span></div><div class="line">        <span class="keyword">if</span> (i &lt; j)</div><div class="line">        &#123;</div><div class="line">            a[j] = a[i];</div><div class="line">            j--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    a[i] = temp;</div><div class="line">    <span class="comment">/* 最后i == j */</span></div><div class="line">    <span class="keyword">if</span> (low &lt; i) QuickSort(a, low, i - <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (i &lt; high) QuickSort(a, j + <span class="number">1</span>, high);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="排序算法性能比较"><a href="#排序算法性能比较" class="headerlink" title="排序算法性能比较"></a>排序算法性能比较</h1><img src="/2017/02/01/quicksort/sort.jpg" alt="sort.jpg" title="">
       
 
       
@@ -287,18 +221,83 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/quicksort/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/02/01/quicksort/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
+  
+<nav id="article-nav">
+  
+    <a href="/2017/02/01/graph/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          关于图的知识点
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/01/hive-hbase/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hive与hbase的区别</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -306,161 +305,28 @@
 
 
   
-    <article id="post-hive-hbase" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/01/hive-hbase/" class="archive-article-date">
-  	<time datetime="2017-02-01T14:57:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><ul>
-<li>hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）</li>
-<li>hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实时运行，而不是运行map/reduce任务。hive被分区为表格，表格又被进一步分割为列簇。列簇必须使用schema定义，列簇将某一类型列集合起来。每一个key/value对在hbase中被定义为一个cell，每一个key由row-key，列簇，列和时间戳。在hbase中，行是key/value映射的集合，这个映射通过row-key来唯一标识。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/02/01/hive-hbase/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据处理/" class="article-tag-list-link color5">数据处理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/hive-hbase/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="quicksort" data-title="快速排序" data-url="http://yoursite.com/2017/02/01/quicksort/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"qttao"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
-    <article id="post-binary-tree-non-recursive-traversal" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/01/binary-tree-non-recursive-traversal/" class="archive-article-date">
-  	<time datetime="2017-02-01T05:19:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> TreeNode &#123;</div><div class="line"><span class="keyword">public</span></div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    TreeNode *left, *right;</div><div class="line">    TreeNode(<span class="keyword">int</span> val) &#123;</div><div class="line">        <span class="keyword">this</span> -&gt; val = val;</div><div class="line">        <span class="keyword">this</span> -&gt; left = <span class="keyword">this</span> -&gt; right = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h1><p>根据前序遍历访问的顺序，优先访问根结点，然后再分别访问左孩子和右孩子。即对于任一结点，其可看做是根结点，因此可以直接访问，访问完之后，若其左孩子不为空，按相同规则访问它的左子树；当访问其左子树时，再访问它的右子树。因此其处理过程如下：</p>
-        
-          <a class="article-more-a" href="/2017/02/01/binary-tree-non-recursive-traversal/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">二叉树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据结构/" class="article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/01/binary-tree-non-recursive-traversal/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
 
 
           </div>
@@ -482,8 +348,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
