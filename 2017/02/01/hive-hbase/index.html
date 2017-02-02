@@ -18,7 +18,7 @@ hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase�
 <meta property="og:description" content="定义
 hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）
 hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实">
-<meta property="og:updated_time" content="2017-02-01T15:54:32.000Z">
+<meta property="og:updated_time" content="2017-02-02T02:14:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hive与hbase的区别">
 <meta name="twitter:description" content="定义
@@ -177,6 +177,12 @@ hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase�
     
     <div class="article-entry" itemprop="articleBody">
       
+        
+          <div id="toc" class="article-toc">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#限制"><span class="toc-text">限制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用场景"><span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+          </div>
+        
         <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><ul>
 <li>hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）</li>
 <li>hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实时运行，而不是运行map/reduce任务。hive被分区为表格，表格又被进一步分割为列簇。列簇必须使用schema定义，列簇将某一类型列集合起来。每一个key/value对在hbase中被定义为一个cell，每一个key由row-key，列簇，列和时间戳。在hbase中，行是key/value映射的集合，这个映射通过row-key来唯一标识。</li>
@@ -502,7 +508,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日文，同学征集中...&lt;br&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日本语，同好征集中...&lt;br&gt;</div>
   	  	
     	</section>
     

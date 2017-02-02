@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/01/binary-tree-non-recursive-traversal/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
 <meta property="og:description" content="二叉树定义123456789class TreeNode &amp;#123;public    int val;    TreeNode *left, *right;    TreeNode(int val) &amp;#123;        this -&amp;gt; val = val;        this -&amp;gt; left = this -&amp;gt; right = NULL;    &amp;#125;&amp;#1">
-<meta property="og:updated_time" content="2017-02-01T15:55:37.000Z">
+<meta property="og:updated_time" content="2017-02-02T02:13:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树的非递归遍历">
 <meta name="twitter:description" content="二叉树定义123456789class TreeNode &amp;#123;public    int val;    TreeNode *left, *right;    TreeNode(int val) &amp;#123;        this -&amp;gt; val = val;        this -&amp;gt; left = this -&amp;gt; right = NULL;    &amp;#125;&amp;#1">
@@ -171,6 +171,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        
+          <div id="toc" class="article-toc">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉树定义"><span class="toc-text">二叉树定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后序遍历"><span class="toc-text">后序遍历</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三合一非递归遍历"><span class="toc-text">三合一非递归遍历</span></a></li></ol>
+          </div>
+        
         <h1 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> TreeNode &#123;</div><div class="line"><span class="keyword">public</span></div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    TreeNode *left, *right;</div><div class="line">    TreeNode(<span class="keyword">int</span> val) &#123;</div><div class="line">        <span class="keyword">this</span> -&gt; val = val;</div><div class="line">        <span class="keyword">this</span> -&gt; left = <span class="keyword">this</span> -&gt; right = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h1><p>根据前序遍历访问的顺序，优先访问根结点，然后再分别访问左孩子和右孩子。即对于任一结点，其可看做是根结点，因此可以直接访问，访问完之后，若其左孩子不为空，按相同规则访问它的左子树；当访问其左子树时，再访问它的右子树。因此其处理过程如下：</p>
 <a id="more"></a>
@@ -497,7 +503,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日文，同学征集中...&lt;br&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日本语，同好征集中...&lt;br&gt;</div>
   	  	
     	</section>
     

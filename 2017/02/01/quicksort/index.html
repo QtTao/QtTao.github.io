@@ -17,7 +17,7 @@
 <meta property="og:description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
 算法思想：设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元">
 <meta property="og:image" content="http://yoursite.com/2017/02/01/quicksort/sort.jpg">
-<meta property="og:updated_time" content="2017-02-01T15:54:37.000Z">
+<meta property="og:updated_time" content="2017-02-02T02:14:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速排序">
 <meta name="twitter:description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
@@ -176,6 +176,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        
+          <div id="toc" class="article-toc">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法思想："><span class="toc-text">算法思想：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#排序算法性能比较"><span class="toc-text">排序算法性能比较</span></a></li></ol>
+          </div>
+        
         <p>快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。</p>
 <h1 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h1><p>设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素前面的元素的关键字均小于标准元素的关键字，排在标准元素后面的元素的关键字均大于或等于标准元素的关键字。（即标准元素被放在了未来排好序的数组中该标准元素应在的位置）然后，对这两个字数组中的元素分别再进行方法类同的递归快速排序。递归算法的结束条件是high &lt;= low，即上界下表小于或等于下界下标。</p>
 <a id="more"></a>
@@ -495,7 +501,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日文，同学征集中...&lt;br&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日本语，同好征集中...&lt;br&gt;</div>
   	  	
     	</section>
     

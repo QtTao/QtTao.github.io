@@ -176,9 +176,6 @@
 <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><ul>
 <li><p>深度优先</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void DepthFSearch(AdjMGraph G, int v, int visited[], void Visit(char item))</div><div class="line">&#123;</div><div class="line">    int w;</div><div class="line">    Vist(G.Vertices.list[v]);</div><div class="line">    visited[v];</div><div class="line">    w = GetFirstVex(G, v);</div><div class="line">    /* 寻找当前顶点的邻接顶点 */</div><div class="line">    while (w != -1)</div><div class="line">    &#123;</div><div class="line">        if (!visited[w])</div><div class="line">            DepthFSearch(G, w, visited, Visit)</div><div class="line">        /* 若邻接顶点已被访问，则寻找下一个邻接顶点 */</div><div class="line">        w = GetNextVex(G, v, w);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/02/01/graph/#more">more >></a>
-        
       
 
       
@@ -252,9 +249,6 @@
       
         <p>快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。</p>
 <h1 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h1><p>设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素前面的元素的关键字均小于标准元素的关键字，排在标准元素后面的元素的关键字均大于或等于标准元素的关键字。（即标准元素被放在了未来排好序的数组中该标准元素应在的位置）然后，对这两个字数组中的元素分别再进行方法类同的递归快速排序。递归算法的结束条件是high &lt;= low，即上界下表小于或等于下界下标。</p>
-        
-          <a class="article-more-a" href="/2017/02/01/quicksort/#more">more >></a>
-        
       
 
       
@@ -330,9 +324,6 @@
 <li>hive是一个构件在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）</li>
 <li>hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实时运行，而不是运行map/reduce任务。hive被分区为表格，表格又被进一步分割为列簇。列簇必须使用schema定义，列簇将某一类型列集合起来。每一个key/value对在hbase中被定义为一个cell，每一个key由row-key，列簇，列和时间戳。在hbase中，行是key/value映射的集合，这个映射通过row-key来唯一标识。</li>
 </ul>
-        
-          <a class="article-more-a" href="/2017/02/01/hive-hbase/#more">more >></a>
-        
       
 
       
@@ -406,9 +397,6 @@
       
         <h1 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> TreeNode &#123;</div><div class="line"><span class="keyword">public</span></div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    TreeNode *left, *right;</div><div class="line">    TreeNode(<span class="keyword">int</span> val) &#123;</div><div class="line">        <span class="keyword">this</span> -&gt; val = val;</div><div class="line">        <span class="keyword">this</span> -&gt; left = <span class="keyword">this</span> -&gt; right = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h1><p>根据前序遍历访问的顺序，优先访问根结点，然后再分别访问左孩子和右孩子。即对于任一结点，其可看做是根结点，因此可以直接访问，访问完之后，若其左孩子不为空，按相同规则访问它的左子树；当访问其左子树时，再访问它的右子树。因此其处理过程如下：</p>
-        
-          <a class="article-more-a" href="/2017/02/01/binary-tree-non-recursive-traversal/#more">more >></a>
-        
       
 
       
@@ -629,7 +617,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日文，同学征集中...&lt;br&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">陶啟添，男，来自广东佛山&lt;br&gt; &lt;br&gt;90后，听港乐，看动漫&lt;br&gt; &lt;br&gt;平日喜欢折腾代码，懂点Python和C/C++&lt;br&gt; &lt;br&gt;希望成为一名合格的全栈，通过技术改变生活&lt;br&gt; &lt;br&gt; P.S. 自修日本语，同好征集中...&lt;br&gt;</div>
   	  	
     	</section>
     
