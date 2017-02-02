@@ -15,21 +15,13 @@
 
 
 
-<meta name="description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
-算法思想设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素">
-<meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="http://yoursite.com/2017/02/01/quicksort/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="分类标签">
+<meta property="og:url" content="http://yoursite.com/tags/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
-<meta property="og:description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
-算法思想设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素">
-<meta property="og:image" content="http://yoursite.com/2017/02/01/quicksort/sort.jpg">
-<meta property="og:updated_time" content="2017-02-02T15:59:08.000Z">
+<meta property="og:updated_time" content="2017-02-02T15:36:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速排序">
-<meta name="twitter:description" content="快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。
-算法思想设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素">
-<meta name="twitter:image" content="http://yoursite.com/2017/02/01/quicksort/sort.jpg">
+<meta name="twitter:title" content="分类标签">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -61,7 +53,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>快速排序 | QtTao&#39;s Blog</title>
+<title>分类标签 | QtTao&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -71,7 +63,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -255,11 +247,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-quicksort" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/01/quicksort/" class="article-date">
-      <time datetime="2017-02-01T15:07:16.000Z" itemprop="datePublished">2017-02-01</time>
+      <a href="/tags/index.html" class="article-date">
+      <time datetime="2017-02-02T15:35:52.000Z" itemprop="datePublished">2017-02-02</time>
 </a>
 
 
@@ -274,7 +266,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      快速排序
+      分类标签
     </h1>
   
 
@@ -282,16 +274,8 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
-    </div>
-
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -299,19 +283,86 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>快速排序（Quicksort) 在平均状况下，排序n个项目要O(nlogn)次比较。在最坏状况下则需要O(n2)次比较，但这种状况并不常见。它在排序效率同为O(nlogn)的几种排序方法中效率最高，因此经常被采用。</p>
-<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>设数组a中存放了n个数据元素，low为数组的低端下标，high为数组的高端下标，从数组a中任取一个元素（通常取a[low]）作为标准，调整数组a中各个元素的位置，使排在标准元素前面的元素的关键字均小于标准元素的关键字，排在标准元素后面的元素的关键字均大于或等于标准元素的关键字。（即标准元素被放在了未来排好序的数组中该标准元素应在的位置）然后，对这两个字数组中的元素分别再进行方法类同的递归快速排序。递归算法的结束条件是high &lt;= low，即上界下表小于或等于下界下标。</p>
-<a id="more"></a>
-<p>对快速排序 （挖坑填数）进行形象化总结：</p>
-<ol>
-<li>i = L; j = R; 将基准数（pivot）挖出形成第一个坑a[i]。</li>
-<li>j– 由后向前找比它小的数，找到后挖出此数填入前一个坑a[i]中。</li>
-<li>i++ 由前向后找比它大的数，找到后也挖出此数填入前一个坑a[j]中。</li>
-<li>再重复之行2，3二步，直到i == j，将基准数（pivot）填入a[i]中。</li>
-<li>递归调用上述步骤，直到数组中全部元素从小到大排序完成。</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></div><div class="line"><span class="comment">/* 用递归方法对数据元素a[low]~a[high]进行快速排序 */</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i = low, j = high;</div><div class="line">    <span class="keyword">int</span> temp = a[low];</div><div class="line">    <span class="keyword">while</span> (i &lt; j)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">while</span>(i &lt; j &amp;&amp; temp &lt;= a[j]) j--; <span class="comment">//从数组右端扫描，找比基准小的数并赋给a[i]</span></div><div class="line">        <span class="keyword">if</span> (i &lt; j)</div><div class="line">        &#123;</div><div class="line">            a[i] = a[j];</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line">       </div><div class="line">        <span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; temp) i++; <span class="comment">//从数组左端扫描，找比基准大的数并赋给a[j]</span></div><div class="line">        <span class="keyword">if</span> (i &lt; j)</div><div class="line">        &#123;</div><div class="line">            a[j] = a[i];</div><div class="line">            j--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    a[i] = temp;</div><div class="line">    <span class="comment">/* 最后i == j */</span></div><div class="line">    <span class="keyword">if</span> (low &lt; i) QuickSort(a, low, i - <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (i &lt; high) QuickSort(a, j + <span class="number">1</span>, high);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="排序算法性能比较"><a href="#排序算法性能比较" class="headerlink" title="排序算法性能比较"></a>排序算法性能比较</h2><img src="/2017/02/01/quicksort/sort.jpg" alt="sort.jpg" title="">
+              <style>
+    .article-meta { display: none; }
+    #container .article .article-title { padding-right: 0; }
+    .article-header {
+        padding: 0;
+        padding-top: 26px;
+        border-left: none;
+        text-align: center;
+    }
+    .article-header:hover { border-left: none; }
+    .article-title { font-size: 1.6em }
+    .article-entry hr { margin: 0;}
+    .article-meta,
+    #container .article-info-post.article-info { display: none;}
+    #container .article .article-title { padding: 0; }
+</style>
+
+
+    <!-- Tag Cloud Page -->
+    <hr>
+<br>
+<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/数据处理/">数据处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">4</span></li></ul>
+
+<p class="count"></p>
+
+<div class="tags">
+    <a href="/tags/hive/" style="font-size: 16px; color: #808080">hive</a> <a href="/tags/二叉树/" style="font-size: 16px; color: #808080">二叉树</a> <a href="/tags/图/" style="font-size: 16px; color: #808080">图</a> <a href="/tags/排序/" style="font-size: 35px; color: #000">排序</a>
+</div>
+<style>
+    .category-list li{
+        display: inline-block;
+        margin: 0 1em .5em 0;
+        padding: 4px;
+        border: 1px solid lightgray;
+        font-size: 1.2rem;
+    }
+    .category-list a { color: gray; }
+    .category-list-item:hover a {
+        color: gray;
+        text-decoration: none;
+    }
+    .category-list-count {
+        margin-left: 2px;
+        font-size: .9rem;
+    }
+    .article-entry ul li:before{ display: none; }
+    .article-inner { text-align: center; }
+    .tags {
+        max-width: 42em;
+        margin: 2em auto;
+        margin-top: 0em;
+    }
+    .tags a {
+        margin-right: 1em;
+        line-height: 65px;
+        border-bottom: 1px solid gray;
+        white-space: nowrap;
+        transition: border-bottom .5s;
+    }
+    .tags a:hover {
+        border-bottom: 3px dotted gray;
+        text-decoration: none;
+    }
+    #count > span {
+        margin: auto .2em;
+        font-weight: bold;
+    }
+</style>
+
+<!-- Count tags and categories -->
+<p id="count">
+        已有<span><script>document.write($(".category-list-item").length)</script></span>个分类，
+        共计<span><script>document.write($(".tags > a").length)</script></span>个标签
+</p>
+<script>
+    $('#count').appendTo('.count');
+</script>
+
+          
+        
       
     </div>
     
@@ -320,94 +371,13 @@
     
 
 
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/01/graph/">
-                    关于图的知识点
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/01/hive-hbase/">
-                    hive与hbase的区别
-                </a>
-            </div>
-        
-    </nav>
-
   
 </article>
 
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法思想"><span class="toc-number">1.</span> <span class="toc-text">算法思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序算法性能比较"><span class="toc-number">2.</span> <span class="toc-text">排序算法性能比较</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
 
 
 
 
-
-    
-      <div class="duoshuo" id="comments">
-    <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/01/quicksort/" data-title="快速排序" data-url="http://yoursite.com/2017/02/01/quicksort/"></div>
-    <script>
-        var duoshuoQuery = {short_name:"qttao"};
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            s.async = true; s.charset = 'UTF-8';
-            (d.head || d.body).appendChild(s);
-        }
-
-        
-    </script>
-    
-    <script> loadComment(); </script>
-
-</div>
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/02/01/graph/" title="上一篇: 关于图的知识点">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2017/02/01/hive-hbase/" title="下一篇: hive与hbase的区别">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
 
 
 
