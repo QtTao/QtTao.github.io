@@ -15,28 +15,36 @@
 
 
 
-<meta name="description" content="算法思想首先把有n个元素的数组a初始化创建为最大堆，然后循环执行如下过程直到数组为空为止：
+<meta name="description" content="堆堆的定义如下：
 
-把堆顶a[0]元素（为最大元素）和当前最大堆的最后一个元素交换；
-最大堆元素个数减一；
-由于第一步后根结点不再满足最大堆的定义，因此调整根结点使之满足最大堆的定义；">
+堆是一颗完全二叉树；
+堆中的某个节点的值总是不大于或不小于其孩子节点的值；
+堆中每个节点的子堆都是堆；
+
+当父节点的键值总是大于或者等于任何一个子节点的键值时为最大堆。当父节点的键值总是小于或者等于任何一个子节点的键值时未最小堆。如下图所示，左边为最大堆，右边为最小堆。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆排序">
 <meta property="og:url" content="http://yoursite.com/2017/02/02/heapsort/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
-<meta property="og:description" content="算法思想首先把有n个元素的数组a初始化创建为最大堆，然后循环执行如下过程直到数组为空为止：
+<meta property="og:description" content="堆堆的定义如下：
 
-把堆顶a[0]元素（为最大元素）和当前最大堆的最后一个元素交换；
-最大堆元素个数减一；
-由于第一步后根结点不再满足最大堆的定义，因此调整根结点使之满足最大堆的定义；">
-<meta property="og:updated_time" content="2017-02-02T16:09:29.000Z">
+堆是一颗完全二叉树；
+堆中的某个节点的值总是不大于或不小于其孩子节点的值；
+堆中每个节点的子堆都是堆；
+
+当父节点的键值总是大于或者等于任何一个子节点的键值时为最大堆。当父节点的键值总是小于或者等于任何一个子节点的键值时未最小堆。如下图所示，左边为最大堆，右边为最小堆。">
+<meta property="og:image" content="http://yoursite.com/2017/02/02/heapsort/heap.jpg">
+<meta property="og:updated_time" content="2017-02-04T09:06:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆排序">
-<meta name="twitter:description" content="算法思想首先把有n个元素的数组a初始化创建为最大堆，然后循环执行如下过程直到数组为空为止：
+<meta name="twitter:description" content="堆堆的定义如下：
 
-把堆顶a[0]元素（为最大元素）和当前最大堆的最后一个元素交换；
-最大堆元素个数减一；
-由于第一步后根结点不再满足最大堆的定义，因此调整根结点使之满足最大堆的定义；">
+堆是一颗完全二叉树；
+堆中的某个节点的值总是不大于或不小于其孩子节点的值；
+堆中每个节点的子堆都是堆；
+
+当父节点的键值总是大于或者等于任何一个子节点的键值时为最大堆。当父节点的键值总是小于或者等于任何一个子节点的键值时未最小堆。如下图所示，左边为最大堆，右边为最小堆。">
+<meta name="twitter:image" content="http://yoursite.com/2017/02/02/heapsort/heap.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -197,7 +205,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉树/">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉树/">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多进程/">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li></ul>
                     </div>
                 </section>
                 
@@ -306,13 +314,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>首先把有n个元素的数组a初始化创建为最大堆，然后循环执行如下过程直到数组为空为止：</p>
+        <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>堆的定义如下：</p>
+<ol>
+<li>堆是一颗完全二叉树；</li>
+<li>堆中的某个节点的值总是不大于或不小于其孩子节点的值；</li>
+<li>堆中每个节点的子堆都是堆；</li>
+</ol>
+<p>当父节点的键值总是大于或者等于任何一个子节点的键值时为最大堆。当父节点的键值总是小于或者等于任何一个子节点的键值时未最小堆。如下图所示，左边为最大堆，右边为最小堆。</p>
+<img src="/2017/02/02/heapsort/heap.jpg" alt="heap.jpg" title="">
+<a id="more"></a>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>首先把有n个元素的数组a初始化创建为最大堆，然后循环执行如下过程直到数组为空为止：</p>
 <ol>
 <li>把堆顶a[0]元素（为最大元素）和当前最大堆的最后一个元素交换；</li>
 <li>最大堆元素个数减一；</li>
 <li>由于第一步后根结点不再满足最大堆的定义，因此调整根结点使之满足最大堆的定义；</li>
 </ol>
-<a id="more"></a>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateHeap</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> h)</span> </span>&#123;</div><div class="line"><span class="comment">/* 当完全二叉树中某个非叶结点a[h]（h = (n - 2)/2）的左孩子结点a[2h + 1]和右孩子结点a[2h + 2]都已是最大堆后，调整一个非叶结点a[h]使之满足最大堆。 */</span></div><div class="line">    <span class="keyword">int</span> i, j, flag;</div><div class="line">    <span class="keyword">int</span> temp;</div><div class="line">    <span class="comment">/* i为要建堆的二叉树根结点下标 */</span></div><div class="line">    i = h;</div><div class="line">    <span class="comment">/* j为i的左孩子结点的下标 */</span></div><div class="line">    j = <span class="number">2</span> * i + <span class="number">1</span>;</div><div class="line">    temp = a[i];</div><div class="line">    flag = <span class="number">0</span>;</div><div class="line">    <span class="comment">/* 沿左右孩子中值较大者重复向下筛选 */</span></div><div class="line">    <span class="keyword">while</span> (j &lt; n &amp;&amp; flag != <span class="number">1</span>) &#123;</div><div class="line">        <span class="comment">/* 寻找左右孩子结点中较大者， */</span></div><div class="line">        <span class="keyword">if</span> (j &lt; n - <span class="number">1</span> &amp;&amp; a[j] &lt; a[j + <span class="number">1</span>])</div><div class="line">            j++;</div><div class="line">        <span class="keyword">if</span> (temp &gt; a[i]) &#123;</div><div class="line">            flag = <span class="number">1</span>;</div><div class="line">        <span class="comment">/* 否则把a[j]上移 */</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            a[i] = a[j];</div><div class="line">            i = j;</div><div class="line">            j = <span class="number">2</span> * i + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    a[i] = temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitCreateHeap</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="comment">/* 把数组元素a[0]~a[n - 1]初始化创建为最大堆 */</span></div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">for</span> (i = (n - <span class="number">2</span>)/<span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)</div><div class="line">        CreateHeap(a, n, i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">int</span> temp;</div><div class="line">    <span class="comment">/* 初始化创建最大堆 */</span></div><div class="line">    InitCreateHeap(a, n);</div><div class="line">    <span class="comment">/* 当前最大堆个数每次递减一 */</span></div><div class="line">    <span class="keyword">for</span> (i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</div><div class="line">        temp = a[<span class="number">0</span>];</div><div class="line">        a[<span class="number">0</span>] = a[i];</div><div class="line">        a[i] = temp;</div><div class="line">        <span class="comment">/* 调整根结点满足最大堆 */</span></div><div class="line">        <span class="comment">/* 子二叉树的根结点下标为零，结点个数为i */</span></div><div class="line">        CreateHeap(a, i, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -326,6 +342,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/04/multiprocessing-pool-lock/">
+                    multiprocessing.Pool的进程锁
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -369,7 +391,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/02/04/multiprocessing-pool-lock/" title="上一篇: multiprocessing.Pool的进程锁">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -381,7 +405,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/multiprocessing-pool-lock/">multiprocessing.Pool的进程锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
 
 
 
