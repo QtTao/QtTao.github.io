@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/02/25/python-character-coding/basestring.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/02/25/python-character-coding/str-unicode.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/02/25/python-character-coding/tao-decode.jpg">
-<meta property="og:updated_time" content="2017-02-25T15:51:34.000Z">
+<meta property="og:updated_time" content="2017-02-25T16:01:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python字符编码">
 <meta name="twitter:description" content="基本概念
@@ -319,15 +319,15 @@
 <li>解码（decode）：将字节流解析为字符。</li>
 </ul>
 <a id="more"></a>
-<h2 id="ASCII码的历史"><a href="#ASCII码的历史" class="headerlink" title="ASCII码的历史"></a>ASCII码的历史</h2><p>英文字符只用一个字节的存储空间就能表示，比如1 Byte = 8 bits 代表256个字符。ASCII字符集由96个文字和32个控制符组成，只需要7位就能表示所有字符，剩下最高位被用作一些通讯系统的奇偶校验。由于西欧字符的数量远远超出ACSII码所能表达的范围，扩展ASCII码（EASCII）应运而生，EASCII由原来的ASCII码和一些表格符号，计算符号，希腊字母和拉丁符号组成。具体的字符范围是0x00～0x7F + 0x80 ～0xFF。代表性的字符集有CP437和ISO/8859-1。</p>
+<h2 id="ASCII码的历史"><a href="#ASCII码的历史" class="headerlink" title="ASCII码的历史"></a>ASCII码的历史</h2><p>英文字符只用一个字节的存储空间就能表示，比如1 Byte = 8 bits 能代表256个字符。ASCII字符集由96个文字和32个控制符组成，只需要7位就能表示所有字符，剩下最高位被用作一些通讯系统的奇偶校验。由于西欧字符的数量远远超出ACSII码所能表达的范围，扩展ASCII码（EASCII）应运而生，EASCII由原来的ASCII码和一些表格符号，计算符号，希腊字母和拉丁符号组成。具体的字符范围是0x00～0x7F + 0x80 ～0xFF。代表性的字符集有CP437和ISO/8859-1。</p>
 <h2 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h2><p>多字节字符的编码GBF是为了解决汉字在计算机中的表达的问题。一般汉字使用双字节来编码的。代表性的字符集有GB312（共有6763个汉字）和GBK（共有27484个汉字）。</p>
 <h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>Unicode是一种通用的编码方式，它是用十六进制数字表示的，一般在数字前面加上前缀U+，比如A的Unicode编码是「U+0041」，「中」的Unicode编码是「U+4E2D」。Unicode有两种格式：UCS-2和UCS-4。</p>
 <ul>
-<li>UCS-2：使用两个字节，共16个比特，最多可以表达65536个字符</li>
-<li>UCS-4: 使用四个字节，公32个比特，最高位通常为0。理论上可以涵盖一切语言所用的符号</li>
+<li>UCS-2：使用两个字节，共16个比特，最多可以表达65536个字符。</li>
+<li>UCS-4: 使用四个字节，共32个比特，最高位通常为0。理论上可以涵盖一切语言所用的符号。</li>
 </ul>
 <p>Unicode是也有其局限性的。例如一个Unicode字符在网络上传输或者存储起来的时候，并不见得每个字符都需要两个字节，如字符A，统一使用两个字节会大大地浪费空间。另外，如何判断哪两个字节是表示一个字符，这需要不同的Unicode编码实现方法，如UTF-8和UTF-16。</p>
-<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format，简称UTF-8是一种变长的字符编码实现方式，可以根据具体情况用1至4个字符来表示一个字符。比如英文自负这些原本就可以用ASCII码表示的字符用UTF-8表示时就只需要一个字节的空间，和ASCII是一样的。对于多字节的字符，第一个字节的前n位都设为1，第n+1位设为0，后面字节的前面两位都设为10。剩下的二进制位全部用该字符的Unicode码填充。以「陶」为例，「陶」的Unicode编码是「U+9676」，对应的UTF-8十六进制范围是00000800～0000FFFF，这表明了「陶」用UTF-8表示时需要用3个字节来存储，「U+9676」的二进制表示是1001011001110110，填充到1110xxxx 10xxxxxx 10xxxxxx得到11101001 10011001 10110110，转换成十六进制是e999b6。以下是Unicode和UTF-8转换关系表（x字符表示码点占据的位）。</p>
+<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format，简称UTF-8，是一种变长的字符编码实现方式，可以根据具体情况用1至4个字符来表示一个字符。比如英文字符这些原本就可以用ASCII码表示的字符用UTF-8表示时就只需要一个字节的空间，和ASCII是一样的。对于多字节的字符，第一个字节的前n位都设为1，第n+1位设为0，后面字节的前面两位都设为10。剩下的二进制位全部用该字符的Unicode码填充。以「陶」为例，「陶」的Unicode编码是「U+9676」，对应的UTF-8十六进制范围是00000800～0000FFFF，这表明了「陶」用UTF-8表示时需要用3个字节来存储，「U+9676」的二进制表示是1001011001110110，填充到1110xxxx 10xxxxxx 10xxxxxx得到11101001 10011001 10110110，转换成十六进制是e999b6。以下是Unicode和UTF-8转换关系表（x字符表示码点占据的位）。</p>
 <table>
 <thead>
 <tr>
@@ -406,7 +406,7 @@
 </table>
 <h2 id="Python2编码"><a href="#Python2编码" class="headerlink" title="Python2编码"></a>Python2编码</h2><p>Python2默认编码是ASCII，所以在Python2中源代码文件必须显示地指定编码类型，否则但凡代码中出现有中文就会报语法错误。Python2中的字符串有两种类型，分别是str和unicode，它们都是继承自basestring类，而str类型的字符串的编码格式可以是ascii，utf-8，gbk等任何一种类型。</p>
 <img src="/2017/02/25/python-character-coding/basestring.jpg" alt="basestring.jpg" title="">
-<h3 id="str与unicode转换"><a href="#str与unicode转换" class="headerlink" title="str与unicode转换"></a>str与unicode转换</h3><p>这两种类型的字符串之间的转换靠的是decode和encode两个函数。encode负责将unicode编码成制定的字符编码，用语存储到磁盘或传输到网络种。而decode方法是根据指定编码方式解码后在应用程序种使用，所以从unicode转换到str用encode，从str类型转换到unicode则用decode。</p>
+<h3 id="str与unicode转换"><a href="#str与unicode转换" class="headerlink" title="str与unicode转换"></a>str与unicode转换</h3><p>这两种类型的字符串之间的转换靠的就是decode和encode两个函数。encode负责将unicode编码成制定的字符编码，用语存储到磁盘或传输到网络中。而decode方法是根据指定编码方式解码后在应用程序中使用，所以从unicode转换到str用的是encode，从str类型转换到unicode则用decode。</p>
 <img src="/2017/02/25/python-character-coding/str-unicode.jpg" alt="str-unicode.jpg" title="">
 <h3 id="UnicodeEncodeError或者UnicodeDecodeError的原因"><a href="#UnicodeEncodeError或者UnicodeDecodeError的原因" class="headerlink" title="UnicodeEncodeError或者UnicodeDecodeError的原因"></a>UnicodeEncodeError或者UnicodeDecodeError的原因</h3><p>这些错误的根本原因在于Python2默认是使用ASCII编码进行decode和encode操作。</p>
 <ol>
@@ -415,7 +415,7 @@
 </li>
 <li><p>案例2<br>当str类型与unicode类型的字符串混合使用时，str类型字符串会隐式地将str转换成unicode字符串。「python2默认会使用ascii编码来进行decode操作。」</p>
 </li>
-<li>案例3<br>所有出现乱码的原因都可以归结为字符经过不同编码解码在编码过程种使用的编码格式不一致！比如utf-8编码的字符「陶」占用3个字节，解码成unicode后。如果再用gbk来解码后，只有两个字节长度了，最后出现了乱码问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</li>
+<li>案例3<br>所有出现乱码的原因都可以归结为字符经过不同编码解码导致在编码过程种使用的编码格式不一致！比如utf-8编码的字符「陶」占用3个字节，解码成unicode后。如果再用gbk来解码后，只有两个字节长度了，最后出现了乱码问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</li>
 </ol>
 <img src="/2017/02/25/python-character-coding/tao-decode.jpg" alt="tao-decode.jpg" title="">
 <h3 id="编码解码在Python中的实际应用"><a href="#编码解码在Python中的实际应用" class="headerlink" title="编码解码在Python中的实际应用"></a>编码解码在Python中的实际应用</h3><h4 id="encode-函数"><a href="#encode-函数" class="headerlink" title="encode()函数"></a>encode()函数</h4><p>encode函数的声明：S.encode([encoding[,errors]]) -&gt; object，作用是将str或者unicode编码成str，其中encoding参数指定的是编码结果字符串的编码类型，如果encoding没有指定的话，那么编码类型取sys.getdefaultencoding()。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># 将unicode编码成str，指定返回的str对象编码是gb2312</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode(<span class="string">'gbk'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 抛出UnicodeError错误，编码类型取sys.getdefaultcoding()，默认值为ascii，而ascii编码不支持中文</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode()</div></pre></td></tr></table></figure></p>
