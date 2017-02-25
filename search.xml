@@ -4,6 +4,123 @@
   
     
     <entry>
+      <title><![CDATA[Python字符编码]]></title>
+      <url>http://yoursite.com/2017/02/25/python-character-coding/</url>
+      <content type="html"><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。</li>
+<li>字符：信息单位，它是各种文字和符号的统称。</li>
+<li>字符集：某个范围内字符的集合，比如ASCII有128个字符，GB2312有7445个字符。</li>
+<li>字符码：字符集中每个字符的数字编号，比如ASCII有编号0至127。</li>
+<li>字符编码：将字符集中的字符码映射为字节流的一种具体实现方案，比如ASCII字符编码规定使用单字节中低位的7bits去编码所有字符。「A -&gt; 65 -&gt; 0X41 -&gt; b’01000001’」</li>
+<li>编码（encode）：将字符转换成字节流。</li>
+<li>解码（decode）：将字节流解析为字符。</li>
+</ul>
+<a id="more"></a>
+<h2 id="ASCII码的历史"><a href="#ASCII码的历史" class="headerlink" title="ASCII码的历史"></a>ASCII码的历史</h2><p>英文字符只用一个字节的存储空间就能表示，比如1 Byte = 8 bits 代表256个字符。ASCII字符集由96个文字和32个控制符组成，只需要7位就能表示所有字符，剩下最高位被用作一些通讯系统的奇偶校验。由于西欧字符的数量远远超出ACSII码所能表达的范围，扩展ASCII码（EASCII）应运而生，EASCII由原来的ASCII码和一些表格符号，计算符号，希腊字母和拉丁符号组成。具体的字符范围是0x00～0x7F + 0x80 ～0xFF。代表性的字符集有CP437和ISO/8859-1。</p>
+<h2 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h2><p>多字节字符的编码GBF是为了解决汉字在计算机中的表达的问题。一般汉字使用双字节来编码的。代表性的字符集有GB312（共有6763个汉字）和GBK（共有27484个汉字）。</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>Unicode是一种通用的编码方式，它是用十六进制数字表示的，一般在数字前面加上前缀U+，比如A的Unicode编码是「U+0041」，「中」的Unicode编码是「U+4E2D」。Unicode有两种格式：UCS-2和UCS-4。</p>
+<ul>
+<li>UCS-2：使用两个字节，共16个比特，最多可以表达65536个字符</li>
+<li>UCS-4: 使用四个字节，公32个比特，最高位通常为0。理论上可以涵盖一切语言所用的符号</li>
+</ul>
+<p>Unicode是也有其局限性的。例如一个Unicode字符在网络上传输或者存储起来的时候，并不见得每个字符都需要两个字节，如字符A，统一使用两个字节会大大地浪费空间。另外，如何判断哪两个字节是表示一个字符，这需要不同的Unicode编码实现方法，如UTF-8和UTF-16。</p>
+<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format，简称UTF-8是一种变长的字符编码实现方式，可以根据具体情况用1至4个字符来表示一个字符。比如英文自负这些原本就可以用ASCII码表示的字符用UTF-8表示时就只需要一个字节的空间，和ASCII是一样的。对于多字节的字符，第一个字节的前n位都设为1，第n+1位设为0，后面字节的前面两位都设为10。剩下的二进制位全部用该字符的Unicode码填充。以「陶」为例，「陶」的Unicode编码是「U+9676」，对应的UTF-8十六进制范围是00000800～0000FFFF，这表明了「陶」用UTF-8表示时需要用3个字节来存储，「U+9676」的二进制表示是1001011001110110，填充到1110xxxx 10xxxxxx 10xxxxxx得到11101001 10011001 10110110，转换成十六进制是e999b6。以下是Unicode和UTF-8转换关系表（x字符表示码点占据的位）。</p>
+<table>
+<thead>
+<tr>
+<th>起始值</th>
+<th>终止值</th>
+<th>Byte 1</th>
+<th>Byte 2</th>
+<th>Byte 3</th>
+<th>Byte 4</th>
+<th>Byte 5</th>
+<th>Byte 6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>007F</td>
+<td>0xxxxxxx</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0080</td>
+<td>007FF</td>
+<td>110xxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0800</td>
+<td>FFFF</td>
+<td>1110xxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10000</td>
+<td>1FFFFF</td>
+<td>11110xxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>200000</td>
+<td>3FFFFFF</td>
+<td>111110xx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+</tr>
+<tr>
+<td>4000000</td>
+<td>7FFFFFFF</td>
+<td>1111110x</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Python2编码"><a href="#Python2编码" class="headerlink" title="Python2编码"></a>Python2编码</h2><p>Python2默认编码是ASCII，所以在Python2中源代码文件必须显示地指定编码类型，否则但凡代码中出现有中文就会报语法错误。Python2中的字符串有两种类型，分别是str和unicode，它们都是继承自basestring类，而str类型的字符串的编码格式可以是ascii，utf-8，gbk等任何一种类型。</p>
+<img src="/2017/02/25/python-character-coding/basestring.jpg" alt="basestring.jpg" title="">
+<h3 id="str与unicode转换"><a href="#str与unicode转换" class="headerlink" title="str与unicode转换"></a>str与unicode转换</h3><p>这两种类型的字符串之间的转换靠的是decode和encode两个函数。encode负责将unicode编码成制定的字符编码，用语存储到磁盘或传输到网络种。而decode方法是根据指定编码方式解码后在应用程序种使用，所以从unicode转换到str用encode，从str类型转换到unicode则用decode。</p>
+<img src="/2017/02/25/python-character-coding/str-unicode.jpg" alt="str-unicode.jpg" title="">
+<h3 id="UnicodeEncodeError或者UnicodeDecodeError的原因"><a href="#UnicodeEncodeError或者UnicodeDecodeError的原因" class="headerlink" title="UnicodeEncodeError或者UnicodeDecodeError的原因"></a>UnicodeEncodeError或者UnicodeDecodeError的原因</h3><p>这些错误的根本原因在于Python2默认是使用ASCII编码进行decode和encode操作。</p>
+<ol>
+<li><p>案例1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">'你好'</span>  <span class="comment"># str --&gt; decode</span></div><div class="line">s = <span class="string">u'你好'</span>  <span class="comment"># unicode --&gt; encode</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>案例2<br>当str类型与unicode类型的字符串混合使用时，str类型字符串会隐式地将str转换成unicode字符串。「python2默认会使用ascii编码来进行decode操作。」</p>
+</li>
+<li>案例3<br>所有出现乱码的原因都可以归结为字符经过不同编码解码在编码过程种使用的编码格式不一致！比如utf-8编码的字符「陶」占用3个字节，解码成unicode后。如果再用gbk来解码后，只有两个字节长度了，最后出现了乱码问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</li>
+</ol>
+<img src="/2017/02/25/python-character-coding/tao-decode.jpg" alt="tao-decode.jpg" title="">
+<h3 id="编码解码在Python中的实际应用"><a href="#编码解码在Python中的实际应用" class="headerlink" title="编码解码在Python中的实际应用"></a>编码解码在Python中的实际应用</h3><h4 id="encode-函数"><a href="#encode-函数" class="headerlink" title="encode()函数"></a>encode()函数</h4><p>encode函数的声明：S.encode([encoding[,errors]]) -&gt; object，作用是将str或者unicode编码成str，其中encoding参数指定的是编码结果字符串的编码类型，如果encoding没有指定的话，那么编码类型取sys.getdefaultencoding()。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># 将unicode编码成str，指定返回的str对象编码是gb2312</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode(<span class="string">'gbk'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 抛出UnicodeError错误，编码类型取sys.getdefaultcoding()，默认值为ascii，而ascii编码不支持中文</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode()</div></pre></td></tr></table></figure></p>
+<h4 id="decode-函数"><a href="#decode-函数" class="headerlink" title="decode()函数"></a>decode()函数</h4><p>decode函数的声明：S.decode([encoding[.errors]]) -&gt; string or unicode，作用是将一个str对象解码成unicode对象，其中encoding参数设置是被解码字符串的解码类型，而返回unicode对象的默认编码是utf-8。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># 抛出编码错误，写入文件时将unicode自动转换成str，然后str指定编码为ascii，但实际内容是以utf-8编码的汉字</span></div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data)</div><div class="line"></div><div class="line"><span class="comment"># 解决方案1：手动编码unicode</span></div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data.encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"><span class="comment"># 解决方案2：更改python默认指定编码 (不推荐)</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data.encode())</div><div class="line"></div><div class="line"><span class="comment"># 解决方案3：将python指定编码设置为系统默认语系的编码 （不推荐）</span></div><div class="line"><span class="keyword">import</span> sys, locale</div><div class="line">c = locale.getdefaultlocale()</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(c[<span class="number">1</span>])</div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data.encode())</div></pre></td></tr></table></figure></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[生产者/消费者模式]]></title>
       <url>http://yoursite.com/2017/02/10/producers-consumers/</url>
       <content type="html"><![CDATA[<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>生产者消费者问题</strong>，也称有限缓冲问题（Bounded-buffer problem）是一个多线程同步问题的经典案例。该问题描述了两个共享固定大小缓冲区的线程——即所谓的“生产者”和“消费者”——在实际运行时会发生问题。生产者的主要作用是生成一定量的数据放到缓冲区中，然后重复此过程。与此同时，消费者也在缓冲区消耗这些数据。该问题的关键就是要保证生产者不会在缓冲区满时加入数据，消费者也不会在缓冲区中空时消耗数据。</p>
@@ -31,7 +148,7 @@
     <entry>
       <title><![CDATA[multiprocessing.Pool的进程锁]]></title>
       <url>http://yoursite.com/2017/02/04/multiprocessing-pool-lock/</url>
-      <content type="html"><![CDATA[<p>通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中进入进程锁，解决资源竞争问题。</p>
+      <content type="html"><![CDATA[<p>通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中引入进程锁，解决资源竞争问题。</p>
 <h2 id="参数绑定"><a href="#参数绑定" class="headerlink" title="参数绑定"></a>参数绑定</h2><p>实例化Manager()和创建Manager.Lock()，但是使用Manager会产生大量的进程，同时所有获取锁和释放锁的请求都会发送给Manager，这样会造成进程资源的消耗。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> multiprocessing</div><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line">    pool = multiprocessing.Pool()</div><div class="line">    m = multiprocessing.Manager()</div><div class="line">    l = m.Lock()</div><div class="line">    <span class="comment"># functool.partial作用是把keywords，args的参数传入到func中后，生成一个新的函数，其实仍然是func函数，只是有部分参数已经代入</span></div><div class="line">    <span class="comment"># 这里是为了解决pool.map函数只接受一个iterator作为参数，所以需要将iterator和进程锁绑定在一起</span></div><div class="line">    func = partial(target, l)</div><div class="line">    pool.map(func, iterable)</div><div class="line">    pool.close()</div><div class="line">    pool.join()</div></pre></td></tr></table></figure>
 <a id="more"></a>

@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中进入进程锁，解决资源竞争问题。
+<meta name="description" content="通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中引入进程锁，解决资源竞争问题。
 参数绑定实例化Manager()和创建Manager.Lock()，但是使用Manager会产生大量的进程，同时所有获取锁和释放锁的请求都会发送给Manager，这样会造成进程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="multiprocessing.Pool的进程锁">
 <meta property="og:url" content="http://yoursite.com/2017/02/04/multiprocessing-pool-lock/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
-<meta property="og:description" content="通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中进入进程锁，解决资源竞争问题。
+<meta property="og:description" content="通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中引入进程锁，解决资源竞争问题。
 参数绑定实例化Manager()和创建Manager.Lock()，但是使用Manager会产生大量的进程，同时所有获取锁和释放锁的请求都会发送给Manager，这样会造成进程">
-<meta property="og:updated_time" content="2017-02-04T09:25:58.000Z">
+<meta property="og:updated_time" content="2017-02-25T14:56:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="multiprocessing.Pool的进程锁">
-<meta name="twitter:description" content="通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中进入进程锁，解决资源竞争问题。
+<meta name="twitter:description" content="通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中引入进程锁，解决资源竞争问题。
 参数绑定实例化Manager()和创建Manager.Lock()，但是使用Manager会产生大量的进程，同时所有获取锁和释放锁的请求都会发送给Manager，这样会造成进程">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -108,7 +108,7 @@
         </hgroup>
 
         
-        <p class="header-subtitle">翩若惊鸿 婉若游龙</p>
+        <p class="header-subtitle">团结 紧张 严肃 活泼</p>
         
 
         
@@ -222,7 +222,7 @@
               <h1 class="header-author"><a href="/" title="回到主页">Qitian Tao</a></h1>
             </hgroup>
             
-            <p class="header-subtitle">翩若惊鸿 婉若游龙</p>
+            <p class="header-subtitle">团结 紧张 严肃 活泼</p>
             
             <nav class="header-menu">
                 <ul>
@@ -297,7 +297,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中进入进程锁，解决资源竞争问题。</p>
+        <p>通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中引入进程锁，解决资源竞争问题。</p>
 <h2 id="参数绑定"><a href="#参数绑定" class="headerlink" title="参数绑定"></a>参数绑定</h2><p>实例化Manager()和创建Manager.Lock()，但是使用Manager会产生大量的进程，同时所有获取锁和释放锁的请求都会发送给Manager，这样会造成进程资源的消耗。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> multiprocessing</div><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line">    pool = multiprocessing.Pool()</div><div class="line">    m = multiprocessing.Manager()</div><div class="line">    l = m.Lock()</div><div class="line">    <span class="comment"># functool.partial作用是把keywords，args的参数传入到func中后，生成一个新的函数，其实仍然是func函数，只是有部分参数已经代入</span></div><div class="line">    <span class="comment"># 这里是为了解决pool.map函数只接受一个iterator作为参数，所以需要将iterator和进程锁绑定在一起</span></div><div class="line">    func = partial(target, l)</div><div class="line">    pool.map(func, iterable)</div><div class="line">    pool.close()</div><div class="line">    pool.join()</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -398,7 +398,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/producers-consumers/">生产者/消费者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/multiprocessing-pool-lock/">multiprocessing.Pool的进程锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/python-character-coding/">Python字符编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/producers-consumers/">生产者/消费者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/multiprocessing-pool-lock/">multiprocessing.Pool的进程锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
 
 
 

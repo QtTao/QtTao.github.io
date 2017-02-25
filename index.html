@@ -106,7 +106,7 @@
         </hgroup>
 
         
-        <p class="header-subtitle">翩若惊鸿 婉若游龙</p>
+        <p class="header-subtitle">团结 紧张 严肃 活泼</p>
         
 
         
@@ -220,7 +220,7 @@
               <h1 class="header-author"><a href="/" title="回到主页">Qitian Tao</a></h1>
             </hgroup>
             
-            <p class="header-subtitle">翩若惊鸿 婉若游龙</p>
+            <p class="header-subtitle">团结 紧张 严肃 活泼</p>
             
             <nav class="header-menu">
                 <ul>
@@ -252,6 +252,87 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-python-character-coding" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/25/python-character-coding/" class="article-date">
+      <time datetime="2017-02-25T14:52:14.000Z" itemprop="datePublished">2017-02-25</time>
+</a>
+
+ 
+    <a href="/2017/02/25/python-character-coding/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2017/02/25/python-character-coding/" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/25/python-character-coding/">Python字符编码</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。</li>
+<li>字符：信息单位，它是各种文字和符号的统称。</li>
+<li>字符集：某个范围内字符的集合，比如ASCII有128个字符，GB2312有7445个字符。</li>
+<li>字符码：字符集中每个字符的数字编号，比如ASCII有编号0至127。</li>
+<li>字符编码：将字符集中的字符码映射为字节流的一种具体实现方案，比如ASCII字符编码规定使用单字节中低位的7bits去编码所有字符。「A -&gt; 65 -&gt; 0X41 -&gt; b’01000001’」</li>
+<li>编码（encode）：将字符转换成字节流。</li>
+<li>解码（decode）：将字节流解析为字符。</li>
+</ul>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2017/02/25/python-character-coding/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-producers-consumers" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -368,7 +449,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中进入进程锁，解决资源竞争问题。</p>
+              <p>通常情况下，python标准库中的multiprocessing.Lock对象是不可以作为进程池Pool的参数，这是因为进程锁不能通过pickle序列化。以下提供两种方法允许在多进程使用过程中引入进程锁，解决资源竞争问题。</p>
 <h2 id="参数绑定"><a href="#参数绑定" class="headerlink" title="参数绑定"></a>参数绑定</h2><p>实例化Manager()和创建Manager.Lock()，但是使用Manager会产生大量的进程，同时所有获取锁和释放锁的请求都会发送给Manager，这样会造成进程资源的消耗。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> multiprocessing</div><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line">    pool = multiprocessing.Pool()</div><div class="line">    m = multiprocessing.Manager()</div><div class="line">    l = m.Lock()</div><div class="line">    <span class="comment"># functool.partial作用是把keywords，args的参数传入到func中后，生成一个新的函数，其实仍然是func函数，只是有部分参数已经代入</span></div><div class="line">    <span class="comment"># 这里是为了解决pool.map函数只接受一个iterator作为参数，所以需要将iterator和进程锁绑定在一起</span></div><div class="line">    func = partial(target, l)</div><div class="line">    pool.map(func, iterable)</div><div class="line">    pool.close()</div><div class="line">    pool.join()</div></pre></td></tr></table></figure>
           

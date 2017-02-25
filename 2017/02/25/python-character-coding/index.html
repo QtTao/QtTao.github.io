@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Qitian Tao" />
+
+
+
+<meta name="description" content="基本概念
+字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。
+字符：信息单位，它是各种文字和符号的统称。
+字符集：某个范围内字符的集合，比如ASCII有128个字符，GB2312有7445个字符。
+字符码：字符集中每个字符的数字编号，比如ASCII有编号0至127。
+字符编码：将字符集中的字符码映射为字节流的一种具体实现方案，比如ASCII字符编码规定使用单字节中低位的7bits">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python字符编码">
+<meta property="og:url" content="http://yoursite.com/2017/02/25/python-character-coding/index.html">
+<meta property="og:site_name" content="QtTao's Blog">
+<meta property="og:description" content="基本概念
+字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。
+字符：信息单位，它是各种文字和符号的统称。
+字符集：某个范围内字符的集合，比如ASCII有128个字符，GB2312有7445个字符。
+字符码：字符集中每个字符的数字编号，比如ASCII有编号0至127。
+字符编码：将字符集中的字符码映射为字节流的一种具体实现方案，比如ASCII字符编码规定使用单字节中低位的7bits">
+<meta property="og:image" content="http://yoursite.com/2017/02/25/python-character-coding/basestring.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/02/25/python-character-coding/str-unicode.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/02/25/python-character-coding/tao-decode.jpg">
+<meta property="og:updated_time" content="2017-02-25T15:51:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python字符编码">
+<meta name="twitter:description" content="基本概念
+字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。
+字符：信息单位，它是各种文字和符号的统称。
+字符集：某个范围内字符的集合，比如ASCII有128个字符，GB2312有7445个字符。
+字符码：字符集中每个字符的数字编号，比如ASCII有编号0至127。
+字符编码：将字符集中的字符码映射为字节流的一种具体实现方案，比如ASCII字符编码规定使用单字节中低位的7bits">
+<meta name="twitter:image" content="http://yoursite.com/2017/02/25/python-character-coding/basestring.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="QtTao&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/tekkaman_blade.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Python字符编码 | QtTao&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+</head>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/tekkaman_blade.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Qitian Tao</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">团结 紧张 严肃 活泼</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:taoqt@mail2.sysu.edu.cn" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/QtTao" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉树/">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多进程/">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+                
+                <section class="switch-part switch-part3">
+                
+                    <div id="js-aboutme">自修日本语，同好募集中...</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Qitian Tao</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/tekkaman_blade.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Qitian Tao</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">团结 紧张 严肃 活泼</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:taoqt@mail2.sysu.edu.cn" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/QtTao" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-python-character-coding" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/25/python-character-coding/" class="article-date">
+      <time datetime="2017-02-25T14:52:14.000Z" itemprop="datePublished">2017-02-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python字符编码
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。</li>
+<li>字符：信息单位，它是各种文字和符号的统称。</li>
+<li>字符集：某个范围内字符的集合，比如ASCII有128个字符，GB2312有7445个字符。</li>
+<li>字符码：字符集中每个字符的数字编号，比如ASCII有编号0至127。</li>
+<li>字符编码：将字符集中的字符码映射为字节流的一种具体实现方案，比如ASCII字符编码规定使用单字节中低位的7bits去编码所有字符。「A -&gt; 65 -&gt; 0X41 -&gt; b’01000001’」</li>
+<li>编码（encode）：将字符转换成字节流。</li>
+<li>解码（decode）：将字节流解析为字符。</li>
+</ul>
+<a id="more"></a>
+<h2 id="ASCII码的历史"><a href="#ASCII码的历史" class="headerlink" title="ASCII码的历史"></a>ASCII码的历史</h2><p>英文字符只用一个字节的存储空间就能表示，比如1 Byte = 8 bits 代表256个字符。ASCII字符集由96个文字和32个控制符组成，只需要7位就能表示所有字符，剩下最高位被用作一些通讯系统的奇偶校验。由于西欧字符的数量远远超出ACSII码所能表达的范围，扩展ASCII码（EASCII）应运而生，EASCII由原来的ASCII码和一些表格符号，计算符号，希腊字母和拉丁符号组成。具体的字符范围是0x00～0x7F + 0x80 ～0xFF。代表性的字符集有CP437和ISO/8859-1。</p>
+<h2 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h2><p>多字节字符的编码GBF是为了解决汉字在计算机中的表达的问题。一般汉字使用双字节来编码的。代表性的字符集有GB312（共有6763个汉字）和GBK（共有27484个汉字）。</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>Unicode是一种通用的编码方式，它是用十六进制数字表示的，一般在数字前面加上前缀U+，比如A的Unicode编码是「U+0041」，「中」的Unicode编码是「U+4E2D」。Unicode有两种格式：UCS-2和UCS-4。</p>
+<ul>
+<li>UCS-2：使用两个字节，共16个比特，最多可以表达65536个字符</li>
+<li>UCS-4: 使用四个字节，公32个比特，最高位通常为0。理论上可以涵盖一切语言所用的符号</li>
+</ul>
+<p>Unicode是也有其局限性的。例如一个Unicode字符在网络上传输或者存储起来的时候，并不见得每个字符都需要两个字节，如字符A，统一使用两个字节会大大地浪费空间。另外，如何判断哪两个字节是表示一个字符，这需要不同的Unicode编码实现方法，如UTF-8和UTF-16。</p>
+<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>Unicode Transformation Format，简称UTF-8是一种变长的字符编码实现方式，可以根据具体情况用1至4个字符来表示一个字符。比如英文自负这些原本就可以用ASCII码表示的字符用UTF-8表示时就只需要一个字节的空间，和ASCII是一样的。对于多字节的字符，第一个字节的前n位都设为1，第n+1位设为0，后面字节的前面两位都设为10。剩下的二进制位全部用该字符的Unicode码填充。以「陶」为例，「陶」的Unicode编码是「U+9676」，对应的UTF-8十六进制范围是00000800～0000FFFF，这表明了「陶」用UTF-8表示时需要用3个字节来存储，「U+9676」的二进制表示是1001011001110110，填充到1110xxxx 10xxxxxx 10xxxxxx得到11101001 10011001 10110110，转换成十六进制是e999b6。以下是Unicode和UTF-8转换关系表（x字符表示码点占据的位）。</p>
+<table>
+<thead>
+<tr>
+<th>起始值</th>
+<th>终止值</th>
+<th>Byte 1</th>
+<th>Byte 2</th>
+<th>Byte 3</th>
+<th>Byte 4</th>
+<th>Byte 5</th>
+<th>Byte 6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000</td>
+<td>007F</td>
+<td>0xxxxxxx</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0080</td>
+<td>007FF</td>
+<td>110xxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0800</td>
+<td>FFFF</td>
+<td>1110xxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10000</td>
+<td>1FFFFF</td>
+<td>11110xxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>200000</td>
+<td>3FFFFFF</td>
+<td>111110xx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td></td>
+</tr>
+<tr>
+<td>4000000</td>
+<td>7FFFFFFF</td>
+<td>1111110x</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+<td>10xxxxxx</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Python2编码"><a href="#Python2编码" class="headerlink" title="Python2编码"></a>Python2编码</h2><p>Python2默认编码是ASCII，所以在Python2中源代码文件必须显示地指定编码类型，否则但凡代码中出现有中文就会报语法错误。Python2中的字符串有两种类型，分别是str和unicode，它们都是继承自basestring类，而str类型的字符串的编码格式可以是ascii，utf-8，gbk等任何一种类型。</p>
+<img src="/2017/02/25/python-character-coding/basestring.jpg" alt="basestring.jpg" title="">
+<h3 id="str与unicode转换"><a href="#str与unicode转换" class="headerlink" title="str与unicode转换"></a>str与unicode转换</h3><p>这两种类型的字符串之间的转换靠的是decode和encode两个函数。encode负责将unicode编码成制定的字符编码，用语存储到磁盘或传输到网络种。而decode方法是根据指定编码方式解码后在应用程序种使用，所以从unicode转换到str用encode，从str类型转换到unicode则用decode。</p>
+<img src="/2017/02/25/python-character-coding/str-unicode.jpg" alt="str-unicode.jpg" title="">
+<h3 id="UnicodeEncodeError或者UnicodeDecodeError的原因"><a href="#UnicodeEncodeError或者UnicodeDecodeError的原因" class="headerlink" title="UnicodeEncodeError或者UnicodeDecodeError的原因"></a>UnicodeEncodeError或者UnicodeDecodeError的原因</h3><p>这些错误的根本原因在于Python2默认是使用ASCII编码进行decode和encode操作。</p>
+<ol>
+<li><p>案例1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">'你好'</span>  <span class="comment"># str --&gt; decode</span></div><div class="line">s = <span class="string">u'你好'</span>  <span class="comment"># unicode --&gt; encode</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>案例2<br>当str类型与unicode类型的字符串混合使用时，str类型字符串会隐式地将str转换成unicode字符串。「python2默认会使用ascii编码来进行decode操作。」</p>
+</li>
+<li>案例3<br>所有出现乱码的原因都可以归结为字符经过不同编码解码在编码过程种使用的编码格式不一致！比如utf-8编码的字符「陶」占用3个字节，解码成unicode后。如果再用gbk来解码后，只有两个字节长度了，最后出现了乱码问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</li>
+</ol>
+<img src="/2017/02/25/python-character-coding/tao-decode.jpg" alt="tao-decode.jpg" title="">
+<h3 id="编码解码在Python中的实际应用"><a href="#编码解码在Python中的实际应用" class="headerlink" title="编码解码在Python中的实际应用"></a>编码解码在Python中的实际应用</h3><h4 id="encode-函数"><a href="#encode-函数" class="headerlink" title="encode()函数"></a>encode()函数</h4><p>encode函数的声明：S.encode([encoding[,errors]]) -&gt; object，作用是将str或者unicode编码成str，其中encoding参数指定的是编码结果字符串的编码类型，如果encoding没有指定的话，那么编码类型取sys.getdefaultencoding()。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># 将unicode编码成str，指定返回的str对象编码是gb2312</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode(<span class="string">'gbk'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 抛出UnicodeError错误，编码类型取sys.getdefaultcoding()，默认值为ascii，而ascii编码不支持中文</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode()</div></pre></td></tr></table></figure></p>
+<h4 id="decode-函数"><a href="#decode-函数" class="headerlink" title="decode()函数"></a>decode()函数</h4><p>decode函数的声明：S.decode([encoding[.errors]]) -&gt; string or unicode，作用是将一个str对象解码成unicode对象，其中encoding参数设置是被解码字符串的解码类型，而返回unicode对象的默认编码是utf-8。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># 抛出编码错误，写入文件时将unicode自动转换成str，然后str指定编码为ascii，但实际内容是以utf-8编码的汉字</span></div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data)</div><div class="line"></div><div class="line"><span class="comment"># 解决方案1：手动编码unicode</span></div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data.encode(<span class="string">'utf-8'</span>))</div><div class="line"></div><div class="line"><span class="comment"># 解决方案2：更改python默认指定编码 (不推荐)</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data.encode())</div><div class="line"></div><div class="line"><span class="comment"># 解决方案3：将python指定编码设置为系统默认语系的编码 （不推荐）</span></div><div class="line"><span class="keyword">import</span> sys, locale</div><div class="line">c = locale.getdefaultlocale()</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(c[<span class="number">1</span>])</div><div class="line">data = <span class="string">u'中国汉字'</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'file.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> fd:</div><div class="line">    fd.write(data.encode())</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/10/producers-consumers/">
+                    生产者/消费者模式
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASCII码的历史"><span class="toc-number">2.</span> <span class="toc-text">ASCII码的历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GBK"><span class="toc-number">3.</span> <span class="toc-text">GBK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unicode"><span class="toc-number">4.</span> <span class="toc-text">Unicode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UTF-8"><span class="toc-number">4.1.</span> <span class="toc-text">UTF-8</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python2编码"><span class="toc-number">5.</span> <span class="toc-text">Python2编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#str与unicode转换"><span class="toc-number">5.1.</span> <span class="toc-text">str与unicode转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UnicodeEncodeError或者UnicodeDecodeError的原因"><span class="toc-number">5.2.</span> <span class="toc-text">UnicodeEncodeError或者UnicodeDecodeError的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编码解码在Python中的实际应用"><span class="toc-number">5.3.</span> <span class="toc-text">编码解码在Python中的实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#encode-函数"><span class="toc-number">5.3.1.</span> <span class="toc-text">encode()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#decode-函数"><span class="toc-number">5.3.2.</span> <span class="toc-text">decode()函数</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/25/python-character-coding/" data-title="Python字符编码" data-url="http://yoursite.com/2017/02/25/python-character-coding/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"qttao"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/10/producers-consumers/" title="下一篇: 生产者/消费者模式">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/python-character-coding/">Python字符编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/producers-consumers/">生产者/消费者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/multiprocessing-pool-lock/">multiprocessing.Pool的进程锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i>
+                2017 Qitian Tao
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        $("a[target=_blank]").removeAttr("target");
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
