@@ -77,7 +77,7 @@
     <link href="http://yoursite.com/2017/02/25/python-character-coding/"/>
     <id>http://yoursite.com/2017/02/25/python-character-coding/</id>
     <published>2017-02-25T14:52:14.000Z</published>
-    <updated>2017-02-25T16:01:08.000Z</updated>
+    <updated>2017-02-26T02:51:03.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
 <li>字节：计算机数据存储的基本单元。比如1 Byte = 8 bits。</li>
@@ -180,12 +180,15 @@
 <img src="/2017/02/25/python-character-coding/str-unicode.jpg" alt="str-unicode.jpg" title="">
 <h3 id="UnicodeEncodeError或者UnicodeDecodeError的原因"><a href="#UnicodeEncodeError或者UnicodeDecodeError的原因" class="headerlink" title="UnicodeEncodeError或者UnicodeDecodeError的原因"></a>UnicodeEncodeError或者UnicodeDecodeError的原因</h3><p>这些错误的根本原因在于Python2默认是使用ASCII编码进行decode和encode操作。</p>
 <ol>
-<li><p>案例1</p>
+<li><p>案例I</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">'你好'</span>  <span class="comment"># str --&gt; decode</span></div><div class="line">s = <span class="string">u'你好'</span>  <span class="comment"># unicode --&gt; encode</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>案例2<br>当str类型与unicode类型的字符串混合使用时，str类型字符串会隐式地将str转换成unicode字符串。「python2默认会使用ascii编码来进行decode操作。」</p>
+<li><p>案例II</p>
+<p>当str类型与unicode类型的字符串混合使用时，str类型字符串会隐式地将str转换成unicode字符串。「python2默认会使用ascii编码来进行decode操作。」</p>
 </li>
-<li>案例3<br>所有出现乱码的原因都可以归结为字符经过不同编码解码导致在编码过程种使用的编码格式不一致！比如utf-8编码的字符「陶」占用3个字节，解码成unicode后。如果再用gbk来解码后，只有两个字节长度了，最后出现了乱码问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</li>
+<li><p>案例Ⅲ</p>
+<p>所有出现乱码的原因都可以归结为字符经过不同编码解码导致在编码过程种使用的编码格式不一致！比如utf-8编码的字符「陶」占用3个字节，解码成unicode后。如果再用gbk来解码后，只有两个字节长度了，最后出现了乱码问题，因此防止乱码的最好方式就是始终坚持使用同一种编码格式对字符进行编码和解码操作。</p>
+</li>
 </ol>
 <img src="/2017/02/25/python-character-coding/tao-decode.jpg" alt="tao-decode.jpg" title="">
 <h3 id="编码解码在Python中的实际应用"><a href="#编码解码在Python中的实际应用" class="headerlink" title="编码解码在Python中的实际应用"></a>编码解码在Python中的实际应用</h3><h4 id="encode-函数"><a href="#encode-函数" class="headerlink" title="encode()函数"></a>encode()函数</h4><p>encode函数的声明：S.encode([encoding[,errors]]) -&gt; object，作用是将str或者unicode编码成str，其中encoding参数指定的是编码结果字符串的编码类型，如果encoding没有指定的话，那么编码类型取sys.getdefaultencoding()。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="comment"># 将unicode编码成str，指定返回的str对象编码是gb2312</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode(<span class="string">'gbk'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 抛出UnicodeError错误，编码类型取sys.getdefaultcoding()，默认值为ascii，而ascii编码不支持中文</span></div><div class="line">u = <span class="string">u'中国汉字'</span></div><div class="line">s = u.encode()</div></pre></td></tr></table></figure></p>
