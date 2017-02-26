@@ -1831,6 +1831,9 @@ aside.comment-bar a span {
 aside.comment-bar:active {
   background: none;
 }
+.article img {
+  display: block;
+}
 @-moz-keyframes cd-bounce-1 {
   0% {
     opacity: 0;

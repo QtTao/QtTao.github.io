@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-25T16:01:08.000Z</updated>
+  <updated>2017-02-26T02:44:41.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>常用的hive日期函数</title>
+    <link href="http://yoursite.com/2017/02/26/hive-date-functions/"/>
+    <id>http://yoursite.com/2017/02/26/hive-date-functions/</id>
+    <published>2017-02-26T02:22:50.000Z</published>
+    <updated>2017-02-26T02:44:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>以下日期函数均基于hive 1.1.0-cdh5.7.1版本。</p>
+<p>from_utc_timestamp：将UTC时间转换成指定时区<br>参数类型：timestamp或者timestamp格式的string<br>返回值类型：string</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> FROM_UTC_TIMESTAMP(min_deal_time, <span class="string">'GMT+8'</span>) <span class="keyword">FROM</span> pubdate; <span class="comment">-- min_deal_time TIMESTAMP</span></div><div class="line"><span class="keyword">SELECT</span> FROM_UTC_TIMESTAMP(<span class="string">'2016-11-10 16:59:56.0'</span>, <span class="string">'GMT+8'</span>); <span class="comment">-- 2016-11-10 16:59:56.0 timstamp格式的string</span></div></pre></td></tr></table></figure>
+<p>to_utc_timestamp：将某一时区下的时间转换成UTC时间<br>参数类型：timestamp或者timestamp格式的string<br>返回值类型：string</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TO_UTC_TIMESTAMP(min_comment_time, <span class="string">'GMT+8'</span>) <span class="keyword">FROM</span> pubdate; <span class="comment">-- min_comment_time TIMESTAMP</span></div><div class="line"><span class="keyword">SELECT</span> TO_UTC_TIMESTAMP(<span class="string">'2016-11-10 16:59:56.0'</span>, <span class="string">'GMT+8'</span>); <span class="comment">-- 2016-11-10 16:59:56.0 timstamp格式的string</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>to_date：将日期timestamp格式的string或者timestamp转换成日期<br>参数类型：timestamp或者timestamp格式的string<br>返回值类型：string</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">TO_DATE</span>(start_time) <span class="keyword">FROM</span> shop_promotion; <span class="comment">-- min_comment_time TIMESTAMP</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">TO_DATE</span>(<span class="string">'2016-11-02 10:10:00.0'</span>); <span class="comment">-- 返回 '2016-11-02'</span></div></pre></td></tr></table></figure>
+<p>year：从日期中返回年份部分<br>参数类型：string格式的date，timestamp格式的string, 或者timestamp格式的日期<br>返回值类型：int</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">YEAR</span>(start_time) <span class="keyword">FROM</span> shop_promotion <span class="keyword">LIMIT</span> <span class="number">100</span>; <span class="comment">-- start_time TIMESTAMP</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">YEAR</span>(<span class="string">'2016-11-02 10:10:00.0'</span>); <span class="comment">-- 返回 2016</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">YEAR</span>(<span class="string">'2016-12-12'</span>); <span class="comment">-- 返回 2016</span></div></pre></td></tr></table></figure>
+<p>month：从日期中返回月份部分<br>参数类型：string格式的date，timestamp格式的string, 或者timestamp格式的日期<br>返回值类型：int</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">MONTH</span>(end_time) <span class="keyword">FROM</span> shop_promotion <span class="keyword">LIMIT</span> <span class="number">100</span>; <span class="comment">-- end_time TIMESTAMP</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">MONTH</span>(<span class="string">'2016-11-02 10:10:00.0'</span>); <span class="comment">-- 返回 11</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">MONTH</span>(<span class="string">'2016-12-12'</span>); <span class="comment">-- 返回 12</span></div></pre></td></tr></table></figure>
+<p>date：从字符串中返回日期部分<br>参数类型：timestamp格式的时间，不接受timestamp格式的string<br>返回值类型：string</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="built_in">DATE</span>(min_comment_time) <span class="keyword">FROM</span> pubdate_origin;</div></pre></td></tr></table></figure>
+<p>day：从日期中返回天的部分<br>参数类型：string格式的date，timestamp格式的string, 或者timestamp格式的日期<br>返回值类型：int</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(end_time) <span class="keyword">FROM</span> shop_promotion <span class="keyword">LIMIT</span> <span class="number">100</span>;</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(<span class="string">'2016-11-02 10:10:00.0'</span>); <span class="comment">-- 返回 11</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DAY</span>(<span class="string">'2016-12-12'</span>); <span class="comment">-- 返回 12</span></div></pre></td></tr></table></figure>
+<p>date_sub：返回开始日期start_date减少days天后的日期<br>参数类型：timestamp格式的时间或者string格式下的timestamp（date）| 整型<br>返回值类型：string</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_SUB</span>(FROM_UTC_TIMESTAMP(min_deal_time, <span class="string">'GTM+8'</span>), <span class="number">1</span>)) <span class="keyword">FROM</span> pubdate;</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_SUB</span>(<span class="string">'2016-11-02 10:10:00.0'</span>, <span class="number">1</span>); <span class="comment">-- 返回 2016-11-01</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_SUB</span>(<span class="string">'2016-11-02'</span>, <span class="number">2</span>); <span class="comment">-- 返回 2016-10-31</span></div></pre></td></tr></table></figure>
+<p>date_add：返回开始日期start_date增加days天后的日期<br>参数类型：timestamp格式的时间或者string格式下的timestamp（date）| 整型<br>返回值类型：string</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_ADD</span>(FROM_UTC_TIMESTAMP(min_deal_time, <span class="string">'GTM+8'</span>), <span class="number">1</span>)) <span class="keyword">FROM</span> pubdate;</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_ADD</span>(<span class="string">'2016-11-02 10:10:00.0'</span>, <span class="number">1</span>); <span class="comment">-- 返回 2016-11-03</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_ADD</span>(<span class="string">'2016-11-02'</span>, <span class="number">2</span>); <span class="comment">-- 返回 2016-11-04</span></div></pre></td></tr></table></figure>
+<p>trunc：日期时间截断函数<br>参数类型：timestamp或者string，还有自定义参数负责指定截断部分；</p>
+<ul>
+<li>SYYYY, YYYY, YEAR, SYEAR, YYY, YY, Y: 年份</li>
+<li>Q: 季度</li>
+<li>MONTH, MON, MM, RM: 月份</li>
+<li>WW, W: Same day of the week as the first day of the month.</li>
+<li>DDD, DD, J: 转换成timestamp</li>
+<li>DAY, DY, D: 转换成当前日期所在星期的第一天的日期</li>
+<li>HH, HH12, HH24: 转换成timestamp，包含（24小时制）小时</li>
+<li>MI: 分钟<br>返回值类型：string</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 根据每周的第一天的日期和商品ID对每日销量进行汇总，求得商品的周销量</span></div><div class="line"><span class="keyword">SELECT</span> product_id, <span class="keyword">SUM</span>(<span class="keyword">count</span>) <span class="keyword">AS</span> weekly_deals, <span class="keyword">TO_DATE</span>(TRUNC(dt, <span class="string">'D'</span>)) <span class="keyword">AS</span> <span class="keyword">week</span></div><div class="line"><span class="keyword">FROM</span> daily_deal_wide</div><div class="line"><span class="keyword">WHERE</span> pubdate &gt;= <span class="string">'2016-10-11'</span> <span class="keyword">AND</span> pubdate &lt;= <span class="string">'2016-11-11'</span> <span class="keyword">AND</span> category_name = <span class="string">'裤子'</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">week</span>, product_id</div><div class="line"><span class="keyword">HAVING</span> weekly_deals &gt;= <span class="number">50</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;以下日期函数均基于hive 1.1.0-cdh5.7.1版本。&lt;/p&gt;
+&lt;p&gt;from_utc_timestamp：将UTC时间转换成指定时区&lt;br&gt;参数类型：timestamp或者timestamp格式的string&lt;br&gt;返回值类型：string&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; FROM_UTC_TIMESTAMP(min_deal_time, &lt;span class=&quot;string&quot;&gt;&#39;GMT+8&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; pubdate; &lt;span class=&quot;comment&quot;&gt;-- min_deal_time TIMESTAMP&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; FROM_UTC_TIMESTAMP(&lt;span class=&quot;string&quot;&gt;&#39;2016-11-10 16:59:56.0&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;GMT+8&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;-- 2016-11-10 16:59:56.0 timstamp格式的string&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;to_utc_timestamp：将某一时区下的时间转换成UTC时间&lt;br&gt;参数类型：timestamp或者timestamp格式的string&lt;br&gt;返回值类型：string&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; TO_UTC_TIMESTAMP(min_comment_time, &lt;span class=&quot;string&quot;&gt;&#39;GMT+8&#39;&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; pubdate; &lt;span class=&quot;comment&quot;&gt;-- min_comment_time TIMESTAMP&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; TO_UTC_TIMESTAMP(&lt;span class=&quot;string&quot;&gt;&#39;2016-11-10 16:59:56.0&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;GMT+8&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;-- 2016-11-10 16:59:56.0 timstamp格式的string&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="数据处理" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="hive" scheme="http://yoursite.com/tags/hive/"/>
+    
+  </entry>
   
   <entry>
     <title>Python字符编码</title>
