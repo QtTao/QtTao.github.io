@@ -15,19 +15,12 @@
 
 
 
-<meta name="description" content="计算机网络中，代理（proxy）可分为「正向代理」和「反向代理」，比如著名的翻墙软件 「Shadowsocks」就是一款正向代理软件，全世界前1000的高流量网站都在用的 Web 服务器 「Nginx」也作为反向代理服务器，那么两者之间究竟有什么区别？我尝试着用浅显易懂的例子把两个概念解释清楚。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="正向代理与反向代理（转）">
-<meta property="og:url" content="http://yoursite.com/2017/02/26/forward-reverse-proxies/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="QtTao's Blog">
+<meta property="og:url" content="http://yoursite.com/categories/ETL/index.html">
 <meta property="og:site_name" content="QtTao's Blog">
-<meta property="og:description" content="计算机网络中，代理（proxy）可分为「正向代理」和「反向代理」，比如著名的翻墙软件 「Shadowsocks」就是一款正向代理软件，全世界前1000的高流量网站都在用的 Web 服务器 「Nginx」也作为反向代理服务器，那么两者之间究竟有什么区别？我尝试着用浅显易懂的例子把两个概念解释清楚。">
-<meta property="og:image" content="http://yoursite.com/2017/02/26/forward-reverse-proxies/forward.png">
-<meta property="og:image" content="http://yoursite.com/2017/02/26/forward-reverse-proxies/reverse.png">
-<meta property="og:updated_time" content="2017-03-13T05:38:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正向代理与反向代理（转）">
-<meta name="twitter:description" content="计算机网络中，代理（proxy）可分为「正向代理」和「反向代理」，比如著名的翻墙软件 「Shadowsocks」就是一款正向代理软件，全世界前1000的高流量网站都在用的 Web 服务器 「Nginx」也作为反向代理服务器，那么两者之间究竟有什么区别？我尝试着用浅显易懂的例子把两个概念解释清楚。">
-<meta name="twitter:image" content="http://yoursite.com/2017/02/26/forward-reverse-proxies/forward.png">
+<meta name="twitter:title" content="QtTao's Blog">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -59,7 +52,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>正向代理与反向代理（转） | QtTao&#39;s Blog</title>
+<title>Category: ETL | QtTao&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -69,10 +62,10 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
-        isCategory: false,
+        isCategory: true,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
         search: true
@@ -253,160 +246,56 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-forward-reverse-proxies" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2017/02/26/forward-reverse-proxies/" class="article-date">
-      <time datetime="2017-02-26T12:19:28.000Z" itemprop="datePublished">2017-02-26</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/03/13/etl-tools/" class="archive-article-date">
+      <time datetime="2017-03-13T05:36:07.000Z" itemprop="datePublished">03-13</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      正向代理与反向代理（转）
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/13/etl-tools/">ETL 可视化工具调研</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/网络/">网络</a>
-    </div>
-
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>计算机网络中，代理（proxy）可分为「正向代理」和「反向代理」，比如著名的翻墙软件 「Shadowsocks」就是一款正向代理软件，全世界前1000的高流量网站都在用的 Web 服务器 「Nginx」也作为反向代理服务器，那么两者之间究竟有什么区别？我尝试着用浅显易懂的例子把两个概念解释清楚。</p>
-<a id="more"></a>
-<h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>A同学在大众创业、万众创新的大时代背景下开启他的创业之路，目前他遇到的最大的一个问题就是启动资金，于是他决定去找马云爸爸借钱，可想而知，最后碰一鼻子灰回来了，情急之下，他想到一个办法，找关系开后门，经过一番消息打探，原来A同学的大学老师王老师是马云的同学，于是A同学找到王老师，托王老师帮忙去马云那借500万过来，当然最后事成了。不过马云并不知道这钱是A同学借的，马云是借给王老师的，最后由王老师转交给A同学。这里的王老师在这个过程中扮演了一个非常关键的角色，就是<strong>代理</strong>，也可以说是<strong>正向代理</strong>，王老师代替A同学办这件事，这个过程中，真正借钱的人是谁，马云是不知道的，这点非常关键。</p>
-<p>我们常说的代理也就是指正向代理。正向代理的过程，它隐藏了真实的请求客户端，服务端不知道真实的客户端是谁，客户端请求的服务都被代理服务器代替来请求，科学上网工具「 Shadowsocks 」扮演的就是典型的正向代理角色。在天朝访问 www.google.com 时会被无情的墙掉，要想翻越这堵墙，你可以在国外用 「Shadowsocks 」来搭建一台代理服务器，代理帮我们请求 www.google.com，代理再把请求响应结果返回给我。</p>
-<img src="/2017/02/26/forward-reverse-proxies/forward.png" alt="forward.png" title="">
-<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>大家都有过这样的经历，拨打10086 客服电话，一个地区的 10086 客服有几个或者几十个，你永远都不需要关心在电话那头的是哪一个，叫什么，男的，还是女的，漂亮的还是帅气的，你都不关心，你关心的是你的问题能不能得到专业的解答，你只需要拨通了10086的总机号码，电话那头总会有人会回答你，只是有时慢有时快而已。那么这里的 10086 总机号码就是我们说的<strong>反向代理</strong>。客户不知道真正提供服务的人是谁。</p>
-<p>反向代理隐藏了真实的服务端，当我们访问 www.baidu.com 的时候，就像拨打 10086 一样，背后可能有成千上万台服务器为我们服务，但具体是哪一台，你不知道，也不需要知道，你只需要知道反向代理服务器是谁就好了，www.baidu.com 就是我们的反向代理服务器，反向代理服务器会帮我们把请求转发到提供真实计算的服务器那里去。「Nginx」就是性能非常好的反向代理服务器，它可以用来做负载均衡。</p>
-<img src="/2017/02/26/forward-reverse-proxies/reverse.png" alt="reverse.png" title="">
-<p>两者的区别在于代理的对象不一样，<strong>「正向代理」代理的对象是客户端，「反向代理」代理的对象是服务端。</strong></p>
-<p><em>注</em>：该文转自<a href="http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MjM5MzgyODQxMQ==#wechat_webview_type=1&amp;wechat_redirect" target="_blank" rel="external">《最通俗易懂地解释：正向代理与反向代理》</a></p>
-
-      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/ETL/">ETL</a>
     </div>
-    
+
+
+          
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
-    
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/03/13/etl-tools/">
-                    ETL 可视化工具调研
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/26/hive-date-functions/">
-                    常用的hive日期函数
-                </a>
-            </div>
-        
-    </nav>
-
-  
 </article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正向代理"><span class="toc-number">1.</span> <span class="toc-text">正向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理"><span class="toc-number">2.</span> <span class="toc-text">反向代理</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
-
-    <script>
-        yiliaConfig.toc = ["Hide", "Show", !!"false"];
-    </script>
-
-
-
-
+  
+  
+    </div></section>
+  
 
     
-      <div class="duoshuo" id="comments">
-    <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/26/forward-reverse-proxies/" data-title="正向代理与反向代理（转）" data-url="http://yoursite.com/2017/02/26/forward-reverse-proxies/"></div>
-    <script>
-        var duoshuoQuery = {short_name:"qttao"};
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            s.async = true; s.charset = 'UTF-8';
-            (d.head || d.body).appendChild(s);
-        }
 
-        
-    </script>
-    
-    <script> loadComment(); </script>
-
-</div>
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/03/13/etl-tools/" title="Pre: ETL 可视化工具调研">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2017/02/26/hive-date-functions/" title="Next: 常用的hive日期函数">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/13/etl-tools/">ETL 可视化工具调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/forward-reverse-proxies/">正向代理与反向代理（转）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/26/hive-date-functions/">常用的hive日期函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/python-character-coding/">Python字符编码</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/producers-consumers/">生产者/消费者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/multiprocessing-pool-lock/">multiprocessing.Pool的进程锁</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/02/heapsort/">堆排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/graph/">关于图的知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/quicksort/">快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">

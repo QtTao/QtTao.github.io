@@ -253,6 +253,96 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-etl-tools" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/13/etl-tools/" class="article-date">
+      <time datetime="2017-03-13T05:36:07.000Z" itemprop="datePublished">2017-03-13</time>
+</a>
+
+ 
+    <a href="/2017/03/13/etl-tools/#comments" title="Comments">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2017/03/13/etl-tools/" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/13/etl-tools/">ETL 可视化工具调研</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="什么是ETL"><a href="#什么是ETL" class="headerlink" title="什么是ETL"></a>什么是ETL</h2><p>ETL是 Extract，Transform，Load 的是缩写，分别代表数据的抽取，转换和装载，也就是平时很繁琐，但却是数据分析的基础清洗工作。数据抽取指的是将数据从原始数据库中读取出来，原始的数据库既可以是关系型数据库，如 MySQL，PostgreSQL 等，又可以是非关系型数据库（NoSQL），如 MongoDB，Cassandra 等；数据转换是指根据后续的分析需求预先制定的规则对抽取的数据进行计算和转换，最终将异构的数据统一起来；数据装载一般是指将转换好的数据导入到数据仓库中，如 Hive，Amazon Redshift 等大数据仓库工具。总的来说，ETL 任务需要考虑以下四个方面：</p>
+<ul>
+<li>数据结构设计</li>
+<li>数据质量</li>
+<li>数据传输速度</li>
+<li>数据安全</li>
+</ul>
+<p>而一款优秀的 ETL 可视化工具需要考虑有以下这些方面：</p>
+<ul>
+<li>对数据变更的支持</li>
+<li>详细的日志</li>
+<li>支持各种数据库</li>
+<li>容错机制</li>
+<li>通知支持</li>
+<li>低延迟</li>
+<li>可扩展性</li>
+<li>准确性</li>
+</ul>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/ETL/">ETL</a>
+    </div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2017/03/13/etl-tools/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-forward-reverse-proxies" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -970,84 +1060,10 @@
 
 
   
-    <article id="post-binary-tree-non-recursive-traversal" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2017/02/01/binary-tree-non-recursive-traversal/" class="article-date">
-      <time datetime="2017-02-01T05:19:19.000Z" itemprop="datePublished">2017-02-01</time>
-</a>
-
- 
-    <a href="/2017/02/01/binary-tree-non-recursive-traversal/#comments" title="Comments">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/01/binary-tree-non-recursive-traversal/" ></span>
-        
-        
-    </a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/binary-tree-non-recursive-traversal/">二叉树的非递归遍历</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> TreeNode &#123;</div><div class="line"><span class="keyword">public</span></div><div class="line">    <span class="keyword">int</span> val;</div><div class="line">    TreeNode *left, *right;</div><div class="line">    TreeNode(<span class="keyword">int</span> val) &#123;</div><div class="line">        <span class="keyword">this</span> -&gt; val = val;</div><div class="line">        <span class="keyword">this</span> -&gt; left = <span class="keyword">this</span> -&gt; right = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><p>根据前序遍历访问的顺序，优先访问根结点，然后再分别访问左孩子和右孩子。即对于任一结点，其可看做是根结点，因此可以直接访问，访问完之后，若其左孩子不为空，按相同规则访问它的左子树；当访问其左子树时，再访问它的右子树。因此其处理过程如下：</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/二叉树/">二叉树</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/01/binary-tree-non-recursive-traversal/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
