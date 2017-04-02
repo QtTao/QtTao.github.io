@@ -253,6 +253,82 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-https" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/02/https/" class="article-date">
+      <time datetime="2017-04-02T15:03:48.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+
+ 
+    <a href="/2017/04/02/https/#comments" title="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2017/04/02/https/" ></span>
+        
+        
+    </a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/02/https/">HTTPS 免费申请和续期</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>让个人网站从 HTTP 升级为 HTTPS 是对于众多 web 开发者来说是一件很体现逼格的事情，尤其是能获取免费的 SSL 证书。不花钱一分钱，又能把逼装得漂亮，岂不美哉。</p>
+<p>作为一个幼体后端开发工程师, 哥只是个在公司打酱油的角色，平日的工作就是写一些简单的 API 。有一天，需求来了，意思是给刚开发了三期的 API 加上 SSL 认证。天啊，幸福来得太突然了。但心想这样如此简单的 API 还需要 SSL 证书。哥没有立刻答应，而且也作不了主，所以机智地把锅甩给了技术主管，但结局是可想而知的。</p>
+<h2 id="Let’s-Encrypt"><a href="#Let’s-Encrypt" class="headerlink" title="Let’s Encrypt"></a>Let’s Encrypt</h2><p>没错！写这篇博文的时候，SSL 证书已经安装成功了，但过程却是相当曲折。为了配置好证书花费了数小时，还把原本的工作给耽误了，这样才有了这篇工作记录。</p>
+<p>要开启 HTTPS 认证，就必须要从证书授权机构中获取一个证书，证书有收费的也有免费的。Let’s Encrypt 就是其中一个提供免费证书的机构。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/web/">web</a>
+    </div>
+
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2017/04/02/https/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-etl-tools" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -962,86 +1038,6 @@
       
         <p class="article-more-link">
           <a href="/2017/02/01/quicksort/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hive-hbase" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/01/hive-hbase/" class="article-date">
-      <time datetime="2017-02-01T14:57:57.000Z" itemprop="datePublished">2017-02-01</time>
-</a>
-
- 
-    <a href="/2017/02/01/hive-hbase/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/01/hive-hbase/" ></span>
-        
-        
-    </a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/01/hive-hbase/">hive与hbase的区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
-<li>hive是一个构建在hadoop基础设施上的数据仓库，通过hive可以使用hql语言查询存放在hdfs上的数据。hql是一种类sql语言，这种语言最终被转化为map/reduce。虽然hive提供了sql查询功能，但是hive不能进行交互查询。（只能在hadoop上批量执行hadoop）</li>
-<li>hbase是一种key/value系统，运行在hdfs之上。和hive不一样，hbase能够在数据库上实时运行，而不是运行map/reduce任务。hive被分区为表格，表格又被进一步分割为列簇。列簇必须使用schema定义，列簇将某一类型列集合起来。每一个key/value对在hbase中被定义为一个cell，每一个key由row-key，列簇，列和时间戳。在hbase中，行是key/value映射的集合，这个映射通过row-key来唯一标识。</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/数据处理/">数据处理</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hive/">hive</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/01/hive-hbase/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

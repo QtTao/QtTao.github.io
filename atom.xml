@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-13T06:24:53.000Z</updated>
+  <updated>2017-04-02T15:31:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTPS 免费申请和续期</title>
+    <link href="http://yoursite.com/2017/04/02/https/"/>
+    <id>http://yoursite.com/2017/04/02/https/</id>
+    <published>2017-04-02T15:03:48.000Z</published>
+    <updated>2017-04-02T15:31:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>让个人网站从 HTTP 升级为 HTTPS 是对于众多 web 开发者来说是一件很体现逼格的事情，尤其是能获取免费的 SSL 证书。不花钱一分钱，又能把逼装得漂亮，岂不美哉。</p>
+<p>作为一个幼体后端开发工程师, 哥只是个在公司打酱油的角色，平日的工作就是写一些简单的 API 。有一天，需求来了，意思是给刚开发了三期的 API 加上 SSL 认证。天啊，幸福来得太突然了。但心想这样如此简单的 API 还需要 SSL 证书。哥没有立刻答应，而且也作不了主，所以机智地把锅甩给了技术主管，但结局是可想而知的。</p>
+<h2 id="Let’s-Encrypt"><a href="#Let’s-Encrypt" class="headerlink" title="Let’s Encrypt"></a>Let’s Encrypt</h2><p>没错！写这篇博文的时候，SSL 证书已经安装成功了，但过程却是相当曲折。为了配置好证书花费了数小时，还把原本的工作给耽误了，这样才有了这篇工作记录。</p>
+<p>要开启 HTTPS 认证，就必须要从证书授权机构中获取一个证书，证书有收费的也有免费的。Let’s Encrypt 就是其中一个提供免费证书的机构。</p>
+<a id="more"></a>
+<h3 id="Certbot"><a href="#Certbot" class="headerlink" title="Certbot"></a>Certbot</h3><p>Certbot 是 Let’s Encrypt 官方推荐的一套自动化获取证书的工具。「自动化」说得好听，实情并不是下载好，直接运行就能完成配置。单是安装 Certbot 客户端就遇到麻烦了。网上有一堆博文介绍如何安装 Certbot，比如 <code>yum install certbot</code>，又或者直接从 Github 中克隆 repo <code>git clone https://github.com/certbot/certbot</code>，但如果作为开发者的你，平时有使用 Python 的习惯的话，安装这个工具就更为方便了，因为 pip 一早就已经收录了这个包。只需在终端键入如下命令即可完成安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install certbot</div></pre></td></tr></table></figure>
+<p>解决了安装问题之后，接下就是获取 SSL 证书。网上很多配置教程都会使用 Certbot 的 webroot 模式来生成证书，但对于像 API 这些微型服务，根本就没有根目录，这时使用 webroot 模式就行不通了。最便捷的方式就是使用 Certbot 的 standalone 模式，无需指定网站目录，同时自动启用服务器的 443 服务端口来验证域名的归属。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo certbot --standalone --email xxx@xxx.com.cn <span class="_">-d</span> example.com <span class="_">-d</span> www.example.com</div></pre></td></tr></table></figure>
+<p>出现「Congratulations!」说明服务器所需的证书已经生成好了，它们被放置在 <code>/etc/letsencrypt/live</code> 目录下对应域名的文件夹里。</p>
+<h2 id="Nginx-启用-HTTPS"><a href="#Nginx-启用-HTTPS" class="headerlink" title="Nginx 启用 HTTPS"></a>Nginx 启用 HTTPS</h2><p>因为原来的服务没有配置证书，所以只负责监听 80 端口，接收请求。现在的需求是既要保留 HTTP，又要新增 HTTPS 认证。因此，新增的配置内容只需添加在该服务对应的 Nginx conf 文件的最后即可。配置的内容如下所示：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;</div><div class="line">    <span class="attribute">server_name</span> example.com;</div><div class="line">    </div><div class="line">    <span class="comment">### 以下是重点 ###</span></div><div class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/example.com/fullchain.pem;</div><div class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letscrypt/live/example.com/privkey.pem;</div><div class="line">    <span class="attribute">ssl_dhparam</span> /etc/nginx/ssl/dhparam.pem;</div><div class="line">    </div><div class="line">    <span class="attribute">access_log</span>  /var/log/nginx/log/example_access.log main;</div><div class="line">    <span class="attribute">error_log</span>   /var/log/nginx/log/example_err.log;</div><div class="line">    </div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">proxy_pass</span>  http://127.0.0.1:9876;</div><div class="line">        <span class="attribute">proxy_set_header</span>    X-Real-IP $ remote_addr;</div><div class="line">        <span class="attribute">proxy_set_header</span>    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span>    Host <span class="variable">$host</span>;</div><div class="line">        <span class="attribute">proxy_http_version</span>  <span class="number">1</span>.<span class="number">1</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span>    Connection <span class="string">"Keep-Alive"</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span>    Proxy-Connection <span class="string">"Keep-Alive"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>简单地说明一下上述配置内容的重点部分。<code>ssl_certficate</code> 和 <code>ssl_certficate_key</code>  对应路径下的文件就是此前通过 Certbot 客户端生成好的证书与密钥。至于 <code>ssl_dhparam</code> 属于可选项。默认情况下，Nginx 会使用 openssl 提供的 DHE 参数，其中包含一个较弱的 1024 位的交换密钥。为了增强 Nginx 的密钥，我们可以通过下面的命令生成一个 2048 位的密钥。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo openssl dhparm -out /etc/nginx/ssl/dhparam.pem 2048</div></pre></td></tr></table></figure>
+<p>然后检查部署的服务器 443 端口是否开启。最后，重载 Nginx 配置文件和重启 Nginx 服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo nginx <span class="_">-s</span> reload</div><div class="line">sudo service nginx restart</div></pre></td></tr></table></figure>
+<h2 id="证书监控和更新"><a href="#证书监控和更新" class="headerlink" title="证书监控和更新"></a>证书监控和更新</h2><p>Let’s Encrypt 提供的证书只有 90 天的有效期。借助 <a href="https://letsmonitor.org" target="_blank" rel="external">Let’s Monitor</a> 可以监控所有域名下的 SSL 证书的有效期。当证书快要过期时，Let’s Monitor 会发出邮件提示，提醒你更新证书，非常方便。</p>
+<p>至于证书更新，Certbot 客户端提供了一个更新命令：<code>certbot renew</code>。需要注意一点是刚才生成证书时候使用的是 standalone 模式，验证域名需要启用 443 端口，但是此时 Nginx 服务已经占用了该端口，所以更新证书前必须把 Nginx 服务关掉，才可以成功。这可能会对服务器上正在运行的其他服务有微小的影响。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo certbot renew --pre-hoot <span class="string">'sudo service nginx stop'</span> --post-hook <span class="string">'sudo service nginx start'</span> --dry-run</div></pre></td></tr></table></figure>
+<p><code>dry-run</code> 代表测试模式，用于检验更新过程是否成功，但不会真的去更新证书。出现了「Congratulations」的字样就说明模拟更新成功。</p>
+<h2 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h2><p><a href="https://www.ssllabs.com/ssltest/index.html" target="_blank" rel="external">Qualys SSL Labs</a> 提供全面的 SSL 安全性测试，填入你的域名，等待数分钟后就给你的 HTTPS 配置一个安全级别分数。</p>
+<img src="/2017/04/02/https/ssl_labs.png" alt="ssl_labs.png" title="">
+<p><em>注</em>：最后感谢 <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 组织提供的免费证书，还有技术主管给学习的机会。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h2&gt;&lt;p&gt;让个人网站从 HTTP 升级为 HTTPS 是对于众多 web 开发者来说是一件很体现逼格的事情，尤其是能获取免费的 SSL 证书。不花钱一分钱，又能把逼装得漂亮，岂不美哉。&lt;/p&gt;
+&lt;p&gt;作为一个幼体后端开发工程师, 哥只是个在公司打酱油的角色，平日的工作就是写一些简单的 API 。有一天，需求来了，意思是给刚开发了三期的 API 加上 SSL 认证。天啊，幸福来得太突然了。但心想这样如此简单的 API 还需要 SSL 证书。哥没有立刻答应，而且也作不了主，所以机智地把锅甩给了技术主管，但结局是可想而知的。&lt;/p&gt;
+&lt;h2 id=&quot;Let’s-Encrypt&quot;&gt;&lt;a href=&quot;#Let’s-Encrypt&quot; class=&quot;headerlink&quot; title=&quot;Let’s Encrypt&quot;&gt;&lt;/a&gt;Let’s Encrypt&lt;/h2&gt;&lt;p&gt;没错！写这篇博文的时候，SSL 证书已经安装成功了，但过程却是相当曲折。为了配置好证书花费了数小时，还把原本的工作给耽误了，这样才有了这篇工作记录。&lt;/p&gt;
+&lt;p&gt;要开启 HTTPS 认证，就必须要从证书授权机构中获取一个证书，证书有收费的也有免费的。Let’s Encrypt 就是其中一个提供免费证书的机构。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="web" scheme="http://yoursite.com/categories/web/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>ETL 可视化工具调研</title>
