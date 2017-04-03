@@ -24,11 +24,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo nginx <span class="_">-s</span> reload</div><div class="line">sudo service nginx restart</div></pre></td></tr></table></figure>
 <h2 id="证书监控和更新"><a href="#证书监控和更新" class="headerlink" title="证书监控和更新"></a>证书监控和更新</h2><p>Let’s Encrypt 提供的证书只有 90 天的有效期。借助 <a href="https://letsmonitor.org" target="_blank" rel="external">Let’s Monitor</a> 可以监控所有域名下的 SSL 证书的有效期。当证书快要过期时，Let’s Monitor 会发出邮件提示，提醒你更新证书，非常方便。</p>
 <p>至于证书更新，Certbot 客户端提供了一个更新命令：<code>certbot renew</code>。需要注意一点是刚才生成证书时候使用的是 standalone 模式，验证域名需要启用 443 端口，但是此时 Nginx 服务已经占用了该端口，所以更新证书前必须把 Nginx 服务关掉，才可以成功。这可能会对服务器上正在运行的其他服务有微小的影响。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo certbot renew --pre-hoot <span class="string">'sudo service nginx stop'</span> --post-hook <span class="string">'sudo service nginx start'</span> --dry-run</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo certbot renew --pre-hook <span class="string">'sudo service nginx stop'</span> --post-hook <span class="string">'sudo service nginx start'</span> --dry-run</div></pre></td></tr></table></figure>
 <p><code>dry-run</code> 代表测试模式，用于检验更新过程是否成功，但不会真的去更新证书。出现了「Congratulations」的字样就说明模拟更新成功。</p>
 <h2 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h2><p><a href="https://www.ssllabs.com/ssltest/index.html" target="_blank" rel="external">Qualys SSL Labs</a> 提供全面的 SSL 安全性测试，填入你的域名，等待数分钟后就给你的 HTTPS 配置一个安全级别分数。</p>
 <img src="/2017/04/02/https/ssl_labs.png" alt="ssl_labs.png" title="">
-<p><em>注</em>：最后感谢 <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 组织提供的免费证书，还有技术主管给学习的机会。</p>
+<p><em>注</em>：最后感谢 <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 组织提供的免费证书，还有技术主管的支持。</p>
 ]]></content>
     </entry>
     
