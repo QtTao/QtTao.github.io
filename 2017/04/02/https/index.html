@@ -147,11 +147,11 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -253,7 +253,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap"><article id="post-https" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -306,7 +306,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo certbot --standalone --email xxx@xxx.com.cn <span class="_">-d</span> example.com <span class="_">-d</span> www.example.com</div></pre></td></tr></table></figure>
 <p>出现「Congratulations!」说明服务器所需的证书已经生成好了，它们被放置在 <code>/etc/letsencrypt/live</code> 目录下对应域名的文件夹里。</p>
 <h2 id="Nginx-启用-HTTPS"><a href="#Nginx-启用-HTTPS" class="headerlink" title="Nginx 启用 HTTPS"></a>Nginx 启用 HTTPS</h2><p>因为原来的服务没有配置证书，所以只负责监听 80 端口，接收请求。现在的需求是既要保留 HTTP，又要新增 HTTPS 认证。因此，新增的配置内容只需添加在该服务对应的 Nginx conf 文件的最后即可。配置的内容如下所示：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="section">server</span> &#123;</div><div class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;</div><div class="line">    <span class="attribute">server_name</span> example.com;</div><div class="line">    </div><div class="line">    <span class="comment">### 以下是重点 ###</span></div><div class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/example.com/fullchain.pem;</div><div class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letscrypt/live/example.com/privkey.pem;</div><div class="line">    <span class="attribute">ssl_dhparam</span> /etc/nginx/ssl/dhparam.pem;</div><div class="line">    </div><div class="line">    <span class="attribute">access_log</span>  /var/log/nginx/log/example_access.log main;</div><div class="line">    <span class="attribute">error_log</span>   /var/log/nginx/log/example_err.log;</div><div class="line">    </div><div class="line">    <span class="attribute">location</span> / &#123;</div><div class="line">        <span class="attribute">proxy_pass</span>  http://127.0.0.1:9876;</div><div class="line">        <span class="attribute">proxy_set_header</span>    X-Real-IP $ remote_addr;</div><div class="line">        <span class="attribute">proxy_set_header</span>    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span>    Host <span class="variable">$host</span>;</div><div class="line">        <span class="attribute">proxy_http_version</span>  <span class="number">1</span>.<span class="number">1</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span>    Connection <span class="string">"Keep-Alive"</span>;</div><div class="line">        <span class="attribute">proxy_set_header</span>    Proxy-Connection <span class="string">"Keep-Alive"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen  443 ssl;</div><div class="line">    server_name example.com;</div><div class="line">    </div><div class="line">    ### 以下是重点 ###</div><div class="line">    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;</div><div class="line">    ssl_certificate_key /etc/letscrypt/live/example.com/privkey.pem;</div><div class="line">    ssl_dhparam /etc/nginx/ssl/dhparam.pem;</div><div class="line">    </div><div class="line">    access_log  /var/log/nginx/log/example_access.log main;</div><div class="line">    error_log   /var/log/nginx/log/example_err.log;</div><div class="line">    </div><div class="line">    location / &#123;</div><div class="line">        proxy_pass  http://127.0.0.1:9876;</div><div class="line">        proxy_set_header    X-Real-IP $ remote_addr;</div><div class="line">        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header    Host $host;</div><div class="line">        proxy_http_version  1.1;</div><div class="line">        proxy_set_header    Connection &quot;Keep-Alive&quot;;</div><div class="line">        proxy_set_header    Proxy-Connection &quot;Keep-Alive&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>简单地说明一下上述配置内容的重点部分。<code>ssl_certficate</code> 和 <code>ssl_certficate_key</code>  对应路径下的文件就是此前通过 Certbot 客户端生成好的证书与密钥。至于 <code>ssl_dhparam</code> 属于可选项。默认情况下，Nginx 会使用 openssl 提供的 DHE 参数，其中包含一个较弱的 1024 位的交换密钥。为了增强 Nginx 的密钥，我们可以通过下面的命令生成一个 2048 位的密钥。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo openssl dhparm -out /etc/nginx/ssl/dhparam.pem 2048</div></pre></td></tr></table></figure>
 <p>然后检查部署的服务器 443 端口是否开启。最后，重载 Nginx 配置文件和重启 Nginx 服务。</p>
@@ -342,7 +342,7 @@
 </article>
 
     <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
+        <strong class="toc-title">Contents</strong>
         
             <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘由"><span class="toc-number">1.</span> <span class="toc-text">缘由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Let’s-Encrypt"><span class="toc-number">2.</span> <span class="toc-text">Let’s Encrypt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Certbot"><span class="toc-number">2.1.</span> <span class="toc-text">Certbot</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-启用-HTTPS"><span class="toc-number">3.</span> <span class="toc-text">Nginx 启用 HTTPS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书监控和更新"><span class="toc-number">4.</span> <span class="toc-text">证书监控和更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试工具"><span class="toc-number">5.</span> <span class="toc-text">测试工具</span></a></li></ol>
         
@@ -358,10 +358,10 @@
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 
     <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
     </script>
 
 
@@ -369,24 +369,19 @@
 
 
     
-      <div class="duoshuo" id="comments">
-    <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/02/https/" data-title="HTTPS 免费申请和续期" data-url="http://yoursite.com/2017/04/02/https/"></div>
+        <section class="youyan" id="comments">
     <script>
-        var duoshuoQuery = {short_name:"qttao"};
         var loadComment = function(){
             var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            s.async = true; s.charset = 'UTF-8';
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2132903';
             (d.head || d.body).appendChild(s);
         }
-
-        
     </script>
     
     <script> loadComment(); </script>
 
-</div>
+    <div id="uyan_frame"></div>
+</section>
     
 
 
@@ -394,13 +389,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/03/13/etl-tools/" title="下一篇: ETL 可视化工具调研">
+            <a href="/2017/03/13/etl-tools/" title="Next: ETL 可视化工具调研">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -423,14 +418,14 @@
                 2017 Qitian Tao
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -439,7 +434,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -493,9 +488,9 @@ MathJax.Hub.Queue(function() {
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window
